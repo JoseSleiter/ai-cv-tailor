@@ -191,6 +191,38 @@ export const RESUME_EN: ResumeContent = {
       description:
         "Local-first tool that tailors this CV to a specific job posting and drafts the application email. The AI never writes markup: it emits a validated typed object, checked by a guard that rejects invented companies, dates or skills.",
     },
-    // TODO(sleiter): Pool Pass y lo que quieras sumar aca
+    {
+      title: "Invoice OCR API",
+      link: "https://github.com/JoseSleiter/02-api-ocr",
+      techStack: [
+        "TypeScript",
+        "NestJS",
+        "AWS Textract",
+        "Tesseract",
+        "Docker",
+        "Swagger",
+      ],
+      description:
+        "NestJS service that takes a photo of a receipt and returns structured fields — date and total amount — parsed with locale-aware number handling. Two interchangeable OCR engines behind one interface: AWS Textract and local Tesseract, so the same endpoint runs with or without cloud credentials.",
+    },
+    {
+      title: "Lambda chaining over SNS",
+      link: "https://github.com/JoseSleiter/serverless-sns",
+      techStack: [
+        "Node.js",
+        "AWS Lambda",
+        "Amazon SNS",
+        "Serverless Framework",
+      ],
+      description:
+        "Minimal reference for fan-out on AWS: three Lambdas chained through an SNS topic, declared end to end in serverless.yml. Built to show the decoupling pattern — each function publishes and forgets, and the topic does the routing.",
+    },
+    {
+      title: "RabbitMQ microservice pair",
+      link: "https://github.com/JoseSleiter/rabit-send",
+      techStack: ["Node.js", "Express", "RabbitMQ", "MongoDB", "Docker"],
+      description:
+        "Producer and consumer sides of a dockerized cart microservice talking over RabbitMQ (amqplib). The pair with rabit-receive is the smallest runnable version of the event-driven architecture used in production at Plan Salud C.A.",
+    },
   ],
 };

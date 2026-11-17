@@ -89,14 +89,63 @@ muestra los cinco trabajos, la formación sin rango vacío y las 38 skills.
 | URLs de Ozmoit, Moonshot, TCIT, Grupo Hostienda | `work[].link` |
 | Foto propia (reemplazar el placeholder) | `src/data/avatar.jpg` |
 | Dominio propio, si lo hay | `src/data/identity.ts` → `SITE_URL` |
-| Side projects además de este repo (¿Pool Pass?) | `projects` |
-| **¿Go / Java / Spring Boot entran en `SKILLS_MASTER`?** | `skills-master.ts` → `EXTRA_APPROVED` |
+| Pool Pass u otro side project que quieras sumar | `projects` |
 
-⚠ **La última es una decisión, no un dato que falte.** La plantilla de correo que venías usando
-declara *"Go, Java, Spring Boot"* y el CV de 2026 **no los lista en ninguna parte**. Quedaron
-**fuera** de la lista maestra: el costo de un falso negativo (la IA no puede nombrar algo que sí
-sabés) es muchísimo menor que el de un falso positivo (el CV afirma algo que no sostenés en la
-entrevista). Se revierte agregándolos a `EXTRA_APPROVED`.
+✅ **Go / Java / Spring Boot: resuelto el 17-11-2026.** NO entran (Sleiter: *«esta mal»*). La
+plantilla de correo que se venía usando los declaraba y el CV de 2026 no los lista; `EXTRA_APPROVED`
+queda vacío y la plantilla ya no los nombra.
+
+### Side projects elegidos (17-11-2026)
+
+Criterio: **público** (un repo privado da 404 a quien abra el link) y que **respalde una afirmación
+concreta del CV**. Ningún relleno.
+
+| Proyecto | Repo | Qué afirmación del CV respalda |
+|---|---|---|
+| ai-cv-tailor | `ai-cv-tailor` | Lo actual: IA acotada por tipos, Next.js, Playwright |
+| API de OCR de facturas | `02-api-ocr` | NestJS, AWS, Docker, Clean Architecture — dos motores OCR detrás de una interfaz |
+| Encadenado de Lambdas con SNS | `serverless-sns` | *"serverless backend microservices"* y arquitectura orientada a eventos en AWS |
+| Par de microservicios con RabbitMQ | `rabit-send` + `rabit-receive` | RabbitMQ, Docker y el patrón de Plan Salud C.A., ejecutable |
+
+⚠ **Lo que entró al repo entró también a `SKILLS_MASTER`**, porque la lista es derivada: AWS
+Textract, Tesseract, Swagger, AWS Lambda, Amazon SNS, Serverless Framework y MongoDB ahora son
+afirmables por la IA. Todas están en código propio y público.
+
+⛔ **Quedó fuera a propósito**: `MonoRepo-Gateway-Payments` es un scaffold de Rush con una sola app;
+`gourmet-place` sube sólo el build compilado, sin fuentes; y los repos privados (Pool Pass,
+web-travel, orquideas-clinic-web) darían 404. Si querés alguno en el CV, hay que hacerlo público.
+
+### Higiene del perfil de GitHub (17-11-2026)
+
+El CV enlaza repos, así que el perfil es parte del CV. Se reescribieron **descripción y topics de 8
+repos públicos**, y el **README de 3** (el de `02-api-ocr` era el boilerplate de NestJS tal cual: un
+reclutador no veía una línea propia). Tres descripciones decían literalmente `"test"`, `"a"` y
+`"esto es un test"`.
+
+⇒ Los README dicen también **lo que el repo NO es** —`02-api-ocr` declara que el cliente de Textract
+está cableado pero comentado y que corre contra payloads de muestra—. Es la misma regla que la
+guarda anti-invención: es mejor que lo diga el repo a que lo descubra el entrevistador.
+
+---
+
+## Dependencias: al día, con una excepción razonada (17-11-2026)
+
+Todo subido a la última publicada y **`pnpm build` + `pnpm check` en verde**:
+
+    next 16.4.1 → 16.4.6     ← cierra el advisory de seguridad que el propio build reportaba
+    typescript 5.9.3 → 7.0.2 · biome 2.0.6 → 2.6.8 · lucide-react 0.474 → 1.73
+    @types/node 22 → 26 · @vercel/analytics 1 → 2 · tailwind-merge 2 → 3 · geist 1.7 → 1.9
+
+Biome 2.6 empezó a analizar CSS y no entiende las directivas de Tailwind v3, así que `biome.json`
+declara ahora `css.parser.tailwindDirectives` y apaga dos reglas con su motivo escrito al lado
+(el `!important` del bloque `@media print` es intencional: sin él el CV impreso sale con la
+animación de entrada a medio camino).
+
+⛔ **Tailwind se queda en v3.4.19 y no es olvido.** Subir a v4 reescribe `globals.css`, elimina
+`tailwind.config.js` y **cambia el render de una pantalla cuya fidelidad todavía no verificamos a
+ojo**. Además el upstream está en v3: mantener la paridad es lo que hace barato el
+`git merge upstream/main` que el plan declara como objetivo. Va como tajada propia, con capturas
+antes/después a tres anchos — que es lo que la regla del cotejo pide.
 
 ---
 

@@ -192,6 +192,38 @@ export const RESUME_ES: ResumeContent = {
       description:
         "Herramienta local que adapta este mismo CV a una vacante concreta y redacta el correo de postulación. La IA nunca escribe markup: emite un objeto tipado validado, con una guarda que rechaza empresas, fechas o skills inventadas.",
     },
-    // TODO(sleiter): Pool Pass y lo que quieras sumar aca
+    {
+      title: "API de OCR de facturas",
+      link: "https://github.com/JoseSleiter/02-api-ocr",
+      techStack: [
+        "TypeScript",
+        "NestJS",
+        "AWS Textract",
+        "Tesseract",
+        "Docker",
+        "Swagger",
+      ],
+      description:
+        "Servicio en NestJS que recibe la foto de una factura y devuelve datos estructurados —fecha e importe total— interpretando el formato numérico según la región. Dos motores de OCR intercambiables detrás de una misma interfaz, AWS Textract y Tesseract local, para que el endpoint corra con o sin credenciales de nube.",
+    },
+    {
+      title: "Encadenado de Lambdas con SNS",
+      link: "https://github.com/JoseSleiter/serverless-sns",
+      techStack: [
+        "Node.js",
+        "AWS Lambda",
+        "Amazon SNS",
+        "Serverless Framework",
+      ],
+      description:
+        "Referencia mínima de fan-out en AWS: tres Lambdas encadenadas a través de un tópico SNS, declaradas de punta a punta en serverless.yml. Hecha para mostrar el patrón de desacople: cada función publica y se olvida, y el tópico se encarga del ruteo.",
+    },
+    {
+      title: "Par de microservicios con RabbitMQ",
+      link: "https://github.com/JoseSleiter/rabit-send",
+      techStack: ["Node.js", "Express", "RabbitMQ", "MongoDB", "Docker"],
+      description:
+        "Los dos lados —productor y consumidor— de un microservicio de carrito dockerizado que se comunica por RabbitMQ (amqplib). Junto con rabit-receive es la versión más chica y ejecutable de la arquitectura orientada a eventos que llevé a producción en Plan Salud C.A.",
+    },
   ],
 };
