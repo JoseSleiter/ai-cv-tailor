@@ -40,8 +40,8 @@ export type Block =
 
 const web = (href: string): Link => ({ href, url: displayUrl(href) });
 
-const dates = (start: string, end: string | null) =>
-  `${start} - ${end ?? "Present"}`;
+const dates = (start: string | undefined, end: string | null | undefined) =>
+  start ? `${start} - ${end ?? "Present"}` : undefined;
 
 const sections: Record<SectionKey, (data: ResumeData) => Block[]> = {
   summary: ({ summary }) => [{ kind: "paragraph", inlines: [summary] }],
@@ -49,7 +49,7 @@ const sections: Record<SectionKey, (data: ResumeData) => Block[]> = {
     work.map((job) => ({
       kind: "entry",
       name: job.company,
-      link: web(job.link),
+      link: job.link ? web(job.link) : undefined,
       dates: dates(job.start, job.end),
       role: job.title,
       description: job.description,

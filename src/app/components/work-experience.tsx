@@ -11,6 +11,10 @@ interface CompanyLinkProps {
 }
 
 function CompanyLink({ company, link }: CompanyLinkProps) {
+  if (!link) {
+    return <span>{company}</span>;
+  }
+
   return (
     <a
       className="hover:underline"

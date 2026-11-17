@@ -89,6 +89,16 @@ README explicará cómo enchufar un proveedor alternativo detrás de la interfaz
 
 ## 5. Modelo de datos
 
+### 5.0 ⭐ El CV es BILINGÜE desde el dato, y la IA no traduce
+
+Hay dos CV escritos a mano, ES y EN (`resume-data.es.ts` / `resume-data.en.ts`), más
+`LABELS` con los rótulos de sección y el "Presente" de cada idioma. El `JobSpec` trae el idioma
+detectado de la oferta y **se elige la versión**, no se traduce.
+
+⇒ Traducir con IA teniendo las dos versiones propias pierde la voz del autor, y una traducción
+automática de un CV se nota. Lo único que la IA hace en el idioma elegido es **reordenar y
+reescribir sobre esa redacción**.
+
 ### 5.1 Lo heredado — `ResumeData` (`src/lib/types.ts`)
 
 `name`, `location`, `about`, `summary`, `avatar`, `siteUrl`, `contact{email,tel,social[]}`,

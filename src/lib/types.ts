@@ -1,5 +1,7 @@
 import type { StaticImageData } from "next/image";
 
+export type Locale = "en" | "es";
+
 export type SocialIcon = "github" | "linkedin" | "x";
 
 export interface SocialLink {
@@ -10,7 +12,8 @@ export interface SocialLink {
 
 export interface WorkEntry {
   company: string;
-  link: string;
+  /** Sitio de la empresa. Opcional: sin URL se renderiza como texto, no como un enlace roto. */
+  link?: string;
   badges: string[];
   title: string;
   start: string;
@@ -22,8 +25,9 @@ export interface WorkEntry {
 export interface EducationEntry {
   school: string;
   degree: string;
-  start: string;
-  end: string | null;
+  /** Opcional: sin fechas no se renderiza el rango, en vez de mostrar un guion vacio. */
+  start?: string;
+  end?: string | null;
 }
 
 export interface Project {
@@ -51,4 +55,25 @@ export interface ResumeData {
   work: WorkEntry[];
   skills: string[];
   projects: Project[];
+}
+
+/**
+ * Lo que viaja a y desde la IA, y lo que se guarda en `.applications/<slug>/tailored.json`.
+ *
+ * ⚠ `avatar` queda FUERA a proposito: es un `StaticImageData` que inyecta el bundler, no es
+ * serializable a JSON. Se vuelve a enganchar en el render. Pasarlo por alto rompe la
+ * serializacion sin un error claro.
+ */
+export type ResumeContent = Omit<ResumeData, "avatar">;
+
+/** Rotulos que dependen del idioma y que no son parte del contenido del CV. */
+export interface LocaleLabels {
+  sections: {
+    summary: string;
+    work: string;
+    education: string;
+    skills: string;
+    projects: string;
+  };
+  present: string;
 }

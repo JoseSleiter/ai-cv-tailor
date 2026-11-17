@@ -10,7 +10,7 @@
 |---|---|---|
 | Motor de IA | **Claude Agent SDK** (`@anthropic-ai/claude-agent-sdk`) | Reusa el login local de Claude Code: cero API key, cero costo por postulación, y **la restricción “sólo local” queda estructural**, no un `if`. |
 | PDF | **Playwright print-to-PDF** server-side | Un solo diseño. El PDF es la misma página con el mismo CSS `print:`. |
-| Data del CV | Seed con TODOs; Sleiter pasa su CV/LinkedIn después | No inventar historia laboral. |
+| Data del CV | **Bilingüe ES + EN, escrito a mano** | Sleiter ya tiene las dos versiones redactadas por él. La IA **no traduce**: elige el idioma según la oferta y adapta sobre su redacción. Una traducción automática de un CV se nota. |
 | Repo | `JoseSleiter/ai-cv-tailor`, **público** | Sirve de portfolio y se enlaza desde la sección *side projects* del propio CV. |
 | Ubicación local | `~/Documents/SSD/myProjects/07-ai-cv-tailor` | Sigue la numeración de los proyectos existentes. |
 | Envío del correo | **Manual, siempre** | Nada sale a nombre de una persona sin que lo haya leído. |
@@ -54,23 +54,49 @@ anchos (768, 1024, 1440) y la impresión (`Cmd+P`) a una sola página.
 
 ---
 
-## Fase 2 · Data personal real
+## Fase 2 · Data personal real ✅ (17-11-2026)
 
-**Entrega**
+**Entregado**
 
-- `src/data/resume-data.ts` con los datos de Jose Sleiter: UCAB (Ingeniería en Computación), 7+ años,
-  trabajos remotos (México, Chile, Colombia, España, UK), stack real.
-- `src/data/skills-master.ts` → `SKILLS_MASTER`: **la lista cerrada de skills que la IA podrá usar**.
-  Es la fuente de verdad de la guarda anti-invención.
-- `src/data/email-template.ts` con la plantilla de correo propia y sus marcadores.
-- Avatar, `siteUrl`, redes y metadatos propios (OG image, sitemap, robots).
+- `src/data/resume-data.en.ts` y `resume-data.es.ts` — el CV completo en los **dos idiomas**,
+  transcrito de los PDFs de 2026 de Sleiter. Sin una palabra inventada.
+- `src/data/identity.ts` — lo que no cambia entre idiomas ni entre postulaciones (contacto, redes,
+  `siteUrl`). ⛔ La guarda lo trata como **inmutable**.
+- `src/data/resume-data.ts` — `RESUME_BY_LOCALE`, `LABELS` (rótulos de sección y "Present" por
+  idioma) y `RESUME_DATA` (el default, con avatar).
+- `src/data/skills-master.ts` — `SKILLS_MASTER` **derivado** de lo que el CV ya dice en los dos
+  idiomas (skills + badges + techStack), más `isApprovedSkill()`. Derivado y no escrito a mano para
+  que no pueda desincronizarse del contenido.
+- `src/data/email-template.ts` — la plantilla propia en ES y EN, con marcadores y `guidance` de tono.
+- Avatar de Bartosz **eliminado**, reemplazado por un placeholder neutro.
 
-**Cómo se verifica**: el CV impreso en PDF entra en **una página** y no hay un solo dato del autor
-original en el repo.
+**Ajustes de tipo que la data real obligó** (ninguno cosmético):
 
-⛔ **No entra**: adaptar nada todavía. Es el CV base, el que se despliega.
+- `WorkEntry.link` ahora es **opcional**: sin URL se renderiza texto plano, no un `<a href="">` roto.
+  No había URLs de las empresas y no se inventan.
+- `EducationEntry.start/end` **opcionales**: el CV no trae los años de UCAB, y un rango vacío
+  renderizaba un guion suelto.
+- `ResumeContent = Omit<ResumeData,"avatar">` y `Locale`, que es lo que viaja a la IA.
 
-**Insumo que hace falta de Sleiter**: su CV actual en PDF o el export de LinkedIn.
+**Verificado**: `pnpm build` y `pnpm check` en verde con Node 22; `/index.txt` servido en local
+muestra los cinco trabajos, la formación sin rango vacío y las 38 skills.
+
+**Pendiente de Sleiter** (marcado con `TODO(sleiter)` en el código):
+
+| Qué | Dónde |
+|---|---|
+| Años de inicio/egreso de UCAB | `resume-data.{en,es}.ts` → `education` |
+| URLs de Ozmoit, Moonshot, TCIT, Grupo Hostienda | `work[].link` |
+| Foto propia (reemplazar el placeholder) | `src/data/avatar.jpg` |
+| Dominio propio, si lo hay | `src/data/identity.ts` → `SITE_URL` |
+| Side projects además de este repo (¿Pool Pass?) | `projects` |
+| **¿Go / Java / Spring Boot entran en `SKILLS_MASTER`?** | `skills-master.ts` → `EXTRA_APPROVED` |
+
+⚠ **La última es una decisión, no un dato que falte.** La plantilla de correo que venías usando
+declara *"Go, Java, Spring Boot"* y el CV de 2026 **no los lista en ninguna parte**. Quedaron
+**fuera** de la lista maestra: el costo de un falso negativo (la IA no puede nombrar algo que sí
+sabés) es muchísimo menor que el de un falso positivo (el CV afirma algo que no sostenés en la
+entrevista). Se revierte agregándolos a `EXTRA_APPROVED`.
 
 ---
 

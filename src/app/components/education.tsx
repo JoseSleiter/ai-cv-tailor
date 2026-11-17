@@ -16,7 +16,7 @@ function EducationItem({ education }: EducationItemProps) {
         <h3 className="text-sm font-medium leading-snug print:leading-none">
           {school}
         </h3>
-        <DateRange start={start} end={end} label="Period" />
+        {start && <DateRange start={start} end={end ?? null} label="Period" />}
       </div>
       <div className="mt-1.5 text-sm text-body print:mt-1 print:text-[12px] print:leading-tight">
         {degree}
