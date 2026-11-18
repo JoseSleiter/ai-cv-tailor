@@ -138,7 +138,8 @@ export const RESUME_ES: ResumeContent = {
     {
       school: "Universidad Católica Andrés Bello (UCAB)",
       degree: "Ingeniero en Informática",
-      // TODO(sleiter): anos de inicio y egreso
+      start: "2013",
+      end: "2018",
     },
   ],
 
