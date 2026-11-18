@@ -43,7 +43,7 @@ export const ROLE_FOCUS: Record<Locale, Record<RoleFocus, FocusProfile>> = {
     backend: {
       headline: "Senior Software Engineer · Backend & distributed systems",
       summary:
-        "Senior Software Engineer with 8+ years building and scaling backend systems in production for companies across the US, LATAM and Europe. Designs the parts that have to hold: a multi-tenant platform with schema-per-tenant isolation in PostgreSQL for 50k+ students, event-driven microservices in Python and Node.js over RabbitMQ, a Saga orchestration for distributed payments, and API gateways on AWS and Azure. Took one data-heavy endpoint from 3.2s to 0.6s (-81%) and sustained 99.8% deployment reliability behind a mandatory end-to-end merge gate. Fluent in English (B2+ Professional Proficiency).",
+        "Senior Software Engineer with 8+ years building and scaling backend systems in production for companies across the US, LATAM and Europe. Designs the parts that have to hold: a multi-tenant platform with schema-per-tenant isolation in PostgreSQL for 50k+ students, event-driven microservices in Python and Node.js over RabbitMQ, a Saga orchestration for distributed payments, and API gateways on AWS and Azure. Sustains 99.8% deployment reliability behind a mandatory merge gate of ~400 end-to-end flows. Fluent in English (B2+ Professional Proficiency).",
       pitch:
         "a Senior Software Engineer focused on backend and distributed systems",
       skillOrder: [
@@ -103,7 +103,7 @@ export const ROLE_FOCUS: Record<Locale, Record<RoleFocus, FocusProfile>> = {
     frontend: {
       headline: "Senior Software Engineer · Frontend, React & Next.js",
       summary:
-        "Senior Software Engineer with 8+ years shipping product interfaces in React and Next.js for companies across the US, LATAM and Europe. Works the whole frontend stack with intent: rendering strategy (SSR/SSG/ISR), state at scale (Zustand, Redux Toolkit, TanStack Query), design systems in Tailwind and Material UI, and testing with Jest, React Testing Library, Playwright and Cypress. Rebuilt the back-office of a platform serving 50k+ students, and cut a data-heavy screen from 3.2s to 0.6s (-81%) by reworking how it fetched and rendered. Reads and writes the API behind it, so the contract is never someone else's problem. Fluent in English (B2+ Professional Proficiency).",
+        "Senior Software Engineer with 8+ years shipping product interfaces in React and Next.js for companies across the US, LATAM and Europe. Works the whole frontend stack with intent: rendering strategy (SSR/SSG/ISR), state at scale (Zustand, Redux Toolkit, TanStack Query), design systems in Tailwind and Material UI, and testing with Jest, React Testing Library, Playwright and Cypress. Rebuilt the back-office of a platform serving 50k+ students, and rebuilt a partner portal in Next.js with static generation, taking page load from 8s to 1.5s (-81%). Reads and writes the API behind it, so the contract is never someone else's problem. Fluent in English (B2+ Professional Proficiency).",
       pitch:
         "a Senior Software Engineer focused on frontend — React and Next.js, with the backend background to own the contract",
       skillOrder: [
@@ -135,7 +135,7 @@ export const ROLE_FOCUS: Record<Locale, Record<RoleFocus, FocusProfile>> = {
     backend: {
       headline: "Senior Software Engineer · Backend y sistemas distribuidos",
       summary:
-        "Ingeniero de Software Senior con más de 8 años construyendo y escalando sistemas backend en producción para empresas de EE. UU., LATAM y Europa. Diseña las piezas que tienen que aguantar: una plataforma multi-institución con aislamiento por esquema en PostgreSQL para +50k estudiantes, microservicios orientados a eventos en Python y Node.js sobre RabbitMQ, una orquestación Saga para pagos distribuidos y gateways de API sobre AWS y Azure. Llevó un endpoint de datos intensivos de 3,2s a 0,6s (-81%) y sostuvo un 99,8% de fiabilidad de despliegue detrás de una barrera end-to-end obligatoria. Nivel de inglés fluido (B2+ Avanzado).",
+        "Ingeniero de Software Senior con más de 8 años construyendo y escalando sistemas backend en producción para empresas de EE. UU., LATAM y Europa. Diseña las piezas que tienen que aguantar: una plataforma multi-institución con aislamiento por esquema en PostgreSQL para +50k estudiantes, microservicios orientados a eventos en Python y Node.js sobre RabbitMQ, una orquestación Saga para pagos distribuidos y gateways de API sobre AWS y Azure. Sostiene un 99,8% de fiabilidad de despliegue detrás de una barrera obligatoria de ~400 flujos end-to-end. Nivel de inglés fluido (B2+ Avanzado).",
       pitch:
         "Ingeniero de Software Senior con foco en backend y sistemas distribuidos",
       skillOrder: [
@@ -195,7 +195,7 @@ export const ROLE_FOCUS: Record<Locale, Record<RoleFocus, FocusProfile>> = {
     frontend: {
       headline: "Senior Software Engineer · Frontend, React y Next.js",
       summary:
-        "Ingeniero de Software Senior con más de 8 años desarrollando interfaces de producto en React y Next.js para empresas de EE. UU., LATAM y Europa. Trabaja el frontend completo con criterio: estrategia de renderizado (SSR/SSG/ISR), estado a escala (Zustand, Redux Toolkit, TanStack Query), sistemas de diseño en Tailwind y Material UI, y pruebas con Jest, React Testing Library, Playwright y Cypress. Reconstruyó el back-office de una plataforma con +50k estudiantes y bajó una pantalla de datos intensivos de 3,2s a 0,6s (-81%) replanteando cómo pedía y renderizaba los datos. Lee y escribe la API que tiene detrás, así que el contrato nunca es problema de otro. Nivel de inglés fluido (B2+ Avanzado).",
+        "Ingeniero de Software Senior con más de 8 años desarrollando interfaces de producto en React y Next.js para empresas de EE. UU., LATAM y Europa. Trabaja el frontend completo con criterio: estrategia de renderizado (SSR/SSG/ISR), estado a escala (Zustand, Redux Toolkit, TanStack Query), sistemas de diseño en Tailwind y Material UI, y pruebas con Jest, React Testing Library, Playwright y Cypress. Reconstruyó el back-office de una plataforma con +50k estudiantes y reconstruyó un portal de partners en Next.js con generación estática, bajando la carga de página de 8s a 1,5s (-81%). Lee y escribe la API que tiene detrás, así que el contrato nunca es problema de otro. Nivel de inglés fluido (B2+ Avanzado).",
       pitch:
         "Ingeniero de Software Senior con foco en frontend —React y Next.js—, con el recorrido de backend para hacerme cargo del contrato",
       skillOrder: [
