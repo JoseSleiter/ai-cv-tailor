@@ -1,23 +1,37 @@
 name: CI
 
 on:
-  pull_request:
   push:
     branches: [main]
-
-permissions:
-  contents: read
+  pull_request:
 
 jobs:
-  verify:
+  verificar:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
         with:
-          node-version: 22
-      - uses: pnpm/action-setup@v6
+          node-version-file: .nvmrc
+          cache: pnpm
+
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+
+      # ⛔ El build va ANTES del tsc, y no es gusto: `next-env.d.ts` —que es
+      # quien declara los modulos de imagen, como `./avatar.jpg`— lo GENERA el
+      # build y esta en .gitignore. Un `tsc --noEmit` en limpio falla con
+      # `Cannot find module './avatar.jpg'`, que no tiene nada que ver con el
+      # codigo. Lo encontro esta misma corrida la primera vez que se lanzo.
       - run: pnpm build
-      - run: pnpm verify
+      - run: pnpm exec tsc --noEmit
+      - run: pnpm test
+
+      # ⛔ El e2e corre con el MockAiProvider: sin red, sin claude y sin key.
+      # Un CI que llamara al modelo seria lento, caro y distinto en cada corrida
+      # — y rojo el dia que alguien abra un PR desde un fork.
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e
+        env:
+          CI: "true"
