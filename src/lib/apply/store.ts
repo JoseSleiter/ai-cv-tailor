@@ -88,8 +88,18 @@ export async function saveApplication(app: Application): Promise<string> {
           )
         )
       : Promise.resolve(),
+    /**
+     * El correo se guarda DOS veces a proposito: `email.md` para poder leerlo
+     * dentro de seis meses con un `cat`, y `email.json` para que la
+     * herramienta pueda volver a CARGARLO. Sin el segundo, retomar una
+     * postulacion perdia la carta — que es exactamente lo que paso la primera
+     * vez que se uso de verdad.
+     */
     app.email
       ? write("email.md", `# ${app.email.subject}\n\n${app.email.body}\n`)
+      : Promise.resolve(),
+    app.email
+      ? write("email.json", JSON.stringify(app.email, null, 2))
       : Promise.resolve(),
   ]);
   return dir;
@@ -104,7 +114,9 @@ export async function readApplication(slug: string): Promise<Application> {
     read("spec.json"),
     read("tailored.json"),
   ]);
-  return { meta, spec, tailored };
+  /** El correo es OPCIONAL: una postulacion puede estar adaptada y sin carta. */
+  const email = await read("email.json").catch(() => undefined);
+  return { meta, spec, tailored, email };
 }
 
 export async function listApplications(): Promise<ApplicationMeta[]> {
