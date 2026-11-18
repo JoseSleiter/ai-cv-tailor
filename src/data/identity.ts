@@ -6,8 +6,19 @@ import type { ResumeData, SocialLink } from "@/lib/types";
  * ⛔ La guarda anti-invencion trata estos campos como INMUTABLES: la IA no puede tocarlos.
  */
 
-// TODO(sleiter): reemplazar por el dominio propio cuando este desplegado.
-export const SITE_URL = "https://ai-cv-tailor.vercel.app";
+/**
+ * La URL publica real, desplegada el 18-11-2026.
+ *
+ * ⚠ No es cosmetica: de aca salen el `sitemap.xml`, la linea `Sitemap:` del
+ * robots.txt, los `canonical` y el `image` del JSON-LD. Con el placeholder
+ * viejo los cuatro apuntaban a `ai-cv-tailor.vercel.app`, que es el dominio que
+ * Vercel NO asigno —hay un sufijo— y que por lo tanto no es de nadie. Un
+ * sitemap que apunta a otro host no es un detalle: es decirle a Google que el
+ * contenido vive en otro lado.
+ *
+ * TODO(sleiter): cambiar por el dominio propio si algun dia hay uno.
+ */
+export const SITE_URL = "https://ai-cv-tailor-henna.vercel.app";
 
 export const CONTACT: ResumeData["contact"] = {
   email: "sleiter.js@gmail.com",
