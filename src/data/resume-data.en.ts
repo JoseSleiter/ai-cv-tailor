@@ -162,6 +162,10 @@ export const RESUME_EN: ResumeContent = {
     "React",
     "Next.js",
     "Redux",
+    "Zustand",
+    "Redux Toolkit",
+    "TanStack Query",
+    "Material UI",
     "React Native",
     "Vue.js",
     "Angular",
@@ -189,6 +193,11 @@ export const RESUME_EN: ResumeContent = {
     "GitHub Actions",
     "GitLab CI/CD",
     "Playwright",
+    "SSR / SSG / ISR",
+    "Web Vitals",
+    "Jest",
+    "React Testing Library",
+    "Cypress",
   ],
 
   projects: [
