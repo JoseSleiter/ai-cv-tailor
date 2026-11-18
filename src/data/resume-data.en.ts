@@ -14,12 +14,12 @@ export const RESUME_EN: ResumeContent = {
 
   work: [
     {
-      company: "Ozmo Global Services",
-      title: "Senior Full-Stack Engineer",
+      company: "Self-employed",
+      title: "Software Engineer · Freelance",
       start: "Jan 2023",
       end: "Nov 2026",
       badges: [
-        "Remote (Chile)",
+        "Remote (Colombia)",
         "TypeScript",
         "Python",
         "React",
@@ -32,7 +32,7 @@ export const RESUME_EN: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Core engineer on the rewrite of the university management platform behind 50k+ active students, replacing a NestJS API and its React back-office with a single multi-tenant Ruby on Rails 8 system.",
+        "Independent contractor on the rewrite of a university management platform behind 50k+ active students, replacing a NestJS API and its React back-office with a single multi-tenant Ruby on Rails 8 system.",
       highlights: [
         "Architecture & migration: moved legacy APIs onto a modular Rails 8 and Python microservices architecture on PostgreSQL and Redis — preserving behaviour, measured against a golden-master end-to-end suite rather than asserted.",
         "Tenant isolation: designed schema-per-tenant separation in PostgreSQL resolved from the subdomain and never from user input, so no request can reach another institution's data.",
