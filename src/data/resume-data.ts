@@ -35,6 +35,7 @@ export const LABELS: Record<Locale, LocaleLabels> = {
     present: "Present",
     ui: {
       language: "Language",
+      tailor: "Tailor this CV to a job posting",
       theme: {
         system: "Theme: follow the system",
         light: "Theme: light",
@@ -53,6 +54,7 @@ export const LABELS: Record<Locale, LocaleLabels> = {
     present: "Actualidad",
     ui: {
       language: "Idioma",
+      tailor: "Adaptar este CV a una vacante",
       theme: {
         system: "Tema: seguir al sistema",
         light: "Tema: claro",

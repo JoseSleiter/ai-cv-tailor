@@ -11,21 +11,38 @@ interface TagListProps {
   label: string;
   variant?: keyof typeof variants;
   className?: string;
+  /**
+   * Las que la vacante pide y el CV ya tenia: se imprimen en negrita.
+   *
+   * ⇒ Es el unico resalte del documento, y por eso funciona. Resaltar diez
+   * cosas es no resaltar ninguna, asi que la lista la acota el contrato de la
+   * IA (`highlighted`, maximo 20) y no el gusto del que renderiza.
+   */
+  emphasis?: readonly string[];
 }
+
+const normalize = (tag: string) => tag.toLowerCase().replace(/[\s._/-]/g, "");
 
 export function TagList({
   tags,
   label,
   variant = "tags",
   className,
+  emphasis,
 }: TagListProps) {
   if (tags.length === 0) return null;
+
+  const strong = new Set((emphasis ?? []).map(normalize));
 
   return (
     <ul className={cn(variants[variant], className)} aria-label={label}>
       {tags.map((tag, index) => (
         <li key={tag} className="inline whitespace-nowrap">
-          {tag}
+          {strong.has(normalize(tag)) ? (
+            <strong className="font-semibold text-foreground">{tag}</strong>
+          ) : (
+            tag
+          )}
           {index < tags.length - 1 && (
             <span
               className="whitespace-normal text-muted-foreground"

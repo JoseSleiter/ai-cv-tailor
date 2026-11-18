@@ -149,7 +149,7 @@ antes/después a tres anchos — que es lo que la regla del cotejo pide.
 
 ---
 
-## Fase 3 · La puerta local/nube y el botón
+## Fase 3 · La puerta local/nube y el botón ✅ (18-11-2026)
 
 **Entrega**
 
@@ -170,7 +170,7 @@ del workbench (se mira el output de `next build`).
 
 ---
 
-## Fase 4 · Ingesta de la oferta
+## Fase 4 · Ingesta de la oferta ✅ (18-11-2026)
 
 **Entrega**
 
@@ -190,7 +190,7 @@ en el PR, no “funciona”.
 
 ---
 
-## Fase 5 · El motor de IA
+## Fase 5 · El motor de IA ✅ (18-11-2026)
 
 **Entrega**
 
@@ -213,7 +213,7 @@ caso **legítimo** que tiene que pasar. Un control que sólo prueba el camino fe
 
 ---
 
-## Fase 6 · Workbench de revisión
+## Fase 6 · Workbench de revisión ✅ (18-11-2026, parcial)
 
 **Entrega**
 
@@ -229,7 +229,7 @@ descartar un cambio → ver que el render de la derecha lo refleja.
 
 ---
 
-## Fase 7 · PDF
+## Fase 7 · PDF ✅ (18-11-2026)
 
 **Entrega**
 
@@ -245,7 +245,7 @@ pesa > 0 y tiene 1 página.
 
 ---
 
-## Fase 8 · Correo y cierre de la postulación
+## Fase 8 · Correo y cierre de la postulación ✅ (18-11-2026, parcial)
 
 **Entrega**
 
@@ -258,6 +258,46 @@ pesa > 0 y tiene 1 página.
 historial las lista con su empresa y su fecha.
 
 ⛔ **No entra**: envío automático, seguimiento de respuestas, integración con el correo.
+
+---
+
+## Lo medido el 18-11-2026, con la IA REAL
+
+Una corrida completa contra una oferta de *Senior Full-Stack Engineer (Remote, LATAM)*, con
+`CV_AI_ENABLED=1 pnpm start` y el Claude Agent SDK de verdad:
+
+| Paso | Tiempo | Resultado |
+|---|---|---|
+| `extractJobSpec` + `tailorResume` | **61 s** | `matchScore` 66/100, 9 competencias resaltadas, **18 descartadas** |
+| `draftEmail` | **14 s** | asunto + cuerpo, `pendingPlaceholders: []` |
+| PDF (Playwright) | ~3 s | 192 KB, **2 páginas**, sin foto (`/DCTDecode` ausente) |
+
+El changelog que devolvió es revisable de verdad: *«Dropped Python, Ruby on Rails, Hotwire,
+Flask, Laravel, Vue.js, Azure, MySQL, RabbitMQ, Kong Gateway, GraphQL, Redux, Zustand, Material
+UI y Cypress — the posting names none of the dropped skills»*. Y los `gaps` salieron **duros**,
+que es lo que se les pedía: *«NestJS is weak: no job shows NestJS work the candidate built
+himself»*, *«Cloud mismatch: the most recent production cloud is Azure, while the posting asks
+for AWS»*.
+
+### ⛔ Tres cosas que sólo aparecieron al correrlo
+
+1. **`$schema` mata la llamada.** zod 4 pone
+   `"$schema": "https://json-schema.org/draft/2020-12/schema"` en todo lo que genera, y el CLI
+   valida el `--json-schema` que recibe y muere con *«no schema with key or ref …»*. Sin quitarlo,
+   **ninguna** llamada real funciona — y el `MockAiProvider` pasa igual, así que una suite con
+   mock no lo habría visto nunca.
+2. **La guarda rechazó el CV SIN TOCAR**, que es el peor falso positivo posible: medía los badges
+   contra `SKILLS_MASTER`, y ahí viven la modalidad y el país (`Remote (Chile)`), que la lista
+   maestra excluye a propósito. Se arregló **endureciéndola**, no aflojándola: los badges y el
+   `techStack` se miden contra los del MISMO trabajo o proyecto, así que la IA sólo puede
+   quedarse con los que ya estaban. `SKILLS_MASTER` queda para `skills`, que es el único lugar
+   donde podría nombrar algo sin un ítem concreto detrás.
+3. **El PDF sale en 2 páginas** y la segunda trae sólo *side projects*. No es un defecto de esta
+   fase —el CV completo ya medía eso— pero es la siguiente tajada de ajuste fino.
+
+⚠ **Lo que la guarda sigue sin ver, y está dicho en su propio comentario**: una CIFRA. *«redujo
+la latencia un 40%»* usa sólo palabras aprobadas. Por eso el changelog es revisable y la persona
+aprueba antes de exportar.
 
 ---
 

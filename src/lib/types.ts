@@ -91,5 +91,7 @@ export interface LocaleLabels {
   ui: {
     language: string;
     theme: { system: string; light: string; dark: string };
+    /** El enlace al workbench. Solo pantalla. */
+    tailor: string;
   };
 }

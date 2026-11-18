@@ -7,6 +7,7 @@ import { Summary } from "@/app/components/summary";
 import { WorkExperience } from "@/app/components/work-experience";
 import { CommandMenu } from "@/components/command-menu";
 import { LocaleSwitch } from "@/components/controls/locale-switch";
+import { TailorLink } from "@/components/controls/tailor-link";
 import { ThemeToggle } from "@/components/controls/theme-toggle";
 import { getContactLinks, getSections, type SectionKey } from "@/lib/resume";
 import type { Locale, LocaleLabels, ResumeData } from "@/lib/types";
@@ -15,6 +16,11 @@ interface ResumeProps {
   locale: Locale;
   data: ResumeData;
   labels: LocaleLabels;
+  /**
+   * Competencias a resaltar. Solo las pone el CV ADAPTADO: el publico no
+   * resalta nada porque no sabe para quien se escribe.
+   */
+  highlighted?: readonly string[];
 }
 
 /**
@@ -24,7 +30,7 @@ interface ResumeProps {
  * y al CV adaptado a una vacante, asi que el PDF adaptado sale con el mismo CSS y no hay
  * dos disenos que mantener.
  */
-export function Resume({ locale, data, labels }: ResumeProps) {
+export function Resume({ locale, data, labels, highlighted }: ResumeProps) {
   const content: Record<SectionKey, React.ReactNode> = {
     summary: <Summary summary={data.summary} title={labels.sections.summary} />,
     work: (
@@ -41,7 +47,13 @@ export function Resume({ locale, data, labels }: ResumeProps) {
         presentLabel={labels.present}
       />
     ),
-    skills: <Skills skills={data.skills} title={labels.sections.skills} />,
+    skills: (
+      <Skills
+        skills={data.skills}
+        title={labels.sections.skills}
+        highlighted={highlighted}
+      />
+    ),
     projects: (
       <Projects projects={data.projects} title={labels.sections.projects} />
     ),
@@ -66,6 +78,7 @@ export function Resume({ locale, data, labels }: ResumeProps) {
             data={data}
             controls={
               <div className="flex items-center gap-x-1 print:hidden">
+                <TailorLink label={labels.ui.tailor} />
                 <LocaleSwitch current={locale} label={labels.ui.language} />
                 <ThemeToggle labels={labels.ui.theme} />
               </div>
