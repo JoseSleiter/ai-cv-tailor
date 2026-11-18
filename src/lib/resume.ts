@@ -1,13 +1,13 @@
 import "server-only";
 import { domainToUnicode } from "node:url";
 import { SECTION_TITLES } from "@/data/resume-data";
-import type { ResumeData, SocialIcon, WorkEntry } from "@/lib/types";
+import type { ResumeContent, SocialIcon, WorkEntry } from "@/lib/types";
 
 export type ContactIcon = SocialIcon | "globe" | "mail" | "phone";
 
 export type SectionKey = keyof typeof SECTION_TITLES;
 
-export function getSections(data: ResumeData): SectionKey[] {
+export function getSections(data: ResumeContent): SectionKey[] {
   const keys = Object.keys(SECTION_TITLES) as SectionKey[];
   return keys.filter((key) => data[key].length > 0);
 }
@@ -23,7 +23,7 @@ export function getCurrentRole(work: WorkEntry[]): WorkEntry | undefined {
   return work.find((job) => job.end === null);
 }
 
-export function getPageTitle({ name, work }: ResumeData): string {
+export function getPageTitle({ name, work }: ResumeContent): string {
   return `${name} - ${getCurrentRole(work)?.title ?? "Resume"}`;
 }
 
@@ -46,7 +46,7 @@ export function displayUrl(url: string): string {
 export function getContactLinks({
   personalWebsiteUrl,
   contact,
-}: ResumeData): ContactLink[] {
+}: ResumeContent): ContactLink[] {
   const links: ContactLink[] = [];
   if (personalWebsiteUrl) {
     links.push({

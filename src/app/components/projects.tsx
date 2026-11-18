@@ -1,7 +1,6 @@
 import { ExternalArrow } from "@/components/ui/external-arrow";
 import { Section } from "@/components/ui/section";
 import { TagList } from "@/components/ui/tag-list";
-import { SECTION_TITLES } from "@/data/resume-data";
 import { displayUrl } from "@/lib/resume";
 import type { Project } from "@/lib/types";
 
@@ -63,15 +62,12 @@ function ProjectItem({ project }: ProjectItemProps) {
 
 interface ProjectsProps {
   projects: Project[];
+  title: string;
 }
 
-export function Projects({ projects }: ProjectsProps) {
+export function Projects({ projects, title }: ProjectsProps) {
   return (
-    <Section
-      title={SECTION_TITLES.projects}
-      titleId="side-projects"
-      className="scroll-mb-16"
-    >
+    <Section title={title} titleId="side-projects" className="scroll-mb-16">
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3 print:grid-cols-3 print:gap-4">
         {projects.map((project) => (
           <article key={project.title} className="print:break-inside-avoid">

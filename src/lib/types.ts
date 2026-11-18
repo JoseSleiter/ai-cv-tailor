@@ -76,4 +76,9 @@ export interface LocaleLabels {
     projects: string;
   };
   present: string;
+  /** Rotulos de los controles de la pagina, que no son parte del CV. */
+  ui: {
+    language: string;
+    theme: { system: string; light: string; dark: string };
+  };
 }

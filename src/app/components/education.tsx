@@ -1,13 +1,13 @@
 import { DateRange } from "@/components/ui/date-range";
 import { Section } from "@/components/ui/section";
-import { SECTION_TITLES } from "@/data/resume-data";
 import type { EducationEntry } from "@/lib/types";
 
 interface EducationItemProps {
   education: EducationEntry;
+  presentLabel: string;
 }
 
-function EducationItem({ education }: EducationItemProps) {
+function EducationItem({ education, presentLabel }: EducationItemProps) {
   const { school, start, end, degree } = education;
 
   return (
@@ -16,7 +16,14 @@ function EducationItem({ education }: EducationItemProps) {
         <h3 className="text-sm font-medium leading-snug print:leading-none">
           {school}
         </h3>
-        {start && <DateRange start={start} end={end ?? null} label="Period" />}
+        {start && (
+          <DateRange
+            start={start}
+            end={end ?? null}
+            label="Period"
+            presentLabel={presentLabel}
+          />
+        )}
       </div>
       <div className="mt-1.5 text-sm text-body print:mt-1 print:text-[12px] print:leading-tight">
         {degree}
@@ -27,15 +34,21 @@ function EducationItem({ education }: EducationItemProps) {
 
 interface EducationListProps {
   education: readonly EducationEntry[];
+  title: string;
+  presentLabel: string;
 }
 
-export function Education({ education }: EducationListProps) {
+export function Education({
+  education,
+  title,
+  presentLabel,
+}: EducationListProps) {
   return (
-    <Section title={SECTION_TITLES.education} titleId="education-section">
+    <Section title={title} titleId="education-section">
       <div className="space-y-4 print:space-y-1">
         {education.map((item) => (
           <article key={item.school} className="print:break-inside-avoid">
-            <EducationItem education={item} />
+            <EducationItem education={item} presentLabel={presentLabel} />
           </article>
         ))}
       </div>

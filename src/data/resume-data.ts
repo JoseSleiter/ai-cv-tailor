@@ -27,6 +27,14 @@ export const LABELS: Record<Locale, LocaleLabels> = {
       projects: "Side projects",
     },
     present: "Present",
+    ui: {
+      language: "Language",
+      theme: {
+        system: "Theme: follow the system",
+        light: "Theme: light",
+        dark: "Theme: dark",
+      },
+    },
   },
   es: {
     sections: {
@@ -37,14 +45,25 @@ export const LABELS: Record<Locale, LocaleLabels> = {
       projects: "Proyectos propios",
     },
     present: "Actualidad",
+    ui: {
+      language: "Idioma",
+      theme: {
+        system: "Tema: seguir al sistema",
+        light: "Tema: claro",
+        dark: "Tema: oscuro",
+      },
+    },
   },
 };
 
-/** El CV por defecto, con el avatar enganchado. Es lo que renderiza la home publica. */
-export const RESUME_DATA: ResumeData = {
-  ...RESUME_BY_LOCALE[DEFAULT_LOCALE],
+/** Devuelve el CV de un idioma con el avatar enganchado, listo para renderizar. */
+export const resumeFor = (locale: Locale): ResumeData => ({
+  ...RESUME_BY_LOCALE[locale],
   avatar,
-};
+});
+
+/** El CV por defecto. Es lo que renderizan la home publica y los exportes de texto. */
+export const RESUME_DATA: ResumeData = resumeFor(DEFAULT_LOCALE);
 
 /**
  * ⚠ Compatibilidad con los componentes del template, que todavia importan los rotulos

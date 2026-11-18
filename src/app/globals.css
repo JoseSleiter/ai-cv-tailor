@@ -3,27 +3,80 @@
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Los VALORES de cada paleta viven una sola vez. Los bloques de abajo sólo los mapean,
+   * así que un ajuste de color no puede quedar aplicado a un tema y no al otro.
+   */
   :root {
-    --bg: 98.4% 0.0025 95;
-    --ink: 21% 0.006 70;
-    --body: 40% 0.006 70;
-    --faint: 54% 0.005 70;
-    --rule: 91% 0.004 80;
-    --wash: 95.6% 0.004 85;
+    --light-bg: 98.4% 0.0025 95;
+    --light-ink: 21% 0.006 70;
+    --light-body: 40% 0.006 70;
+    --light-faint: 54% 0.005 70;
+    --light-rule: 91% 0.004 80;
+    --light-wash: 95.6% 0.004 85;
+
+    --dark-bg: 15.5% 0.004 70;
+    --dark-ink: 94% 0.004 80;
+    --dark-body: 76% 0.004 80;
+    --dark-faint: 60% 0.004 80;
+    --dark-rule: 27% 0.004 70;
+    --dark-wash: 20% 0.004 70;
 
     --radius: 0.5rem;
+  }
+
+  /* Por defecto, claro. */
+  :root {
+    --bg: var(--light-bg);
+    --ink: var(--light-ink);
+    --body: var(--light-body);
+    --faint: var(--light-faint);
+    --rule: var(--light-rule);
+    --wash: var(--light-wash);
     color-scheme: light;
   }
 
+  /*
+   * El sistema manda MIENTRAS no haya elección explícita. El `:not([data-theme="light"])`
+   * es lo que permite quedarse en claro dentro de un sistema en oscuro.
+   */
   @media screen and (prefers-color-scheme: dark) {
-    :root {
-      --bg: 15.5% 0.004 70;
-      --ink: 94% 0.004 80;
-      --body: 76% 0.004 80;
-      --faint: 60% 0.004 80;
-      --rule: 27% 0.004 70;
-      --wash: 20% 0.004 70;
+    :root:not([data-theme="light"]) {
+      --bg: var(--dark-bg);
+      --ink: var(--dark-ink);
+      --body: var(--dark-body);
+      --faint: var(--dark-faint);
+      --rule: var(--dark-rule);
+      --wash: var(--dark-wash);
       color-scheme: dark;
+    }
+  }
+
+  /* La elección explícita gana: va última y con la misma especificidad. */
+  :root[data-theme="dark"] {
+    --bg: var(--dark-bg);
+    --ink: var(--dark-ink);
+    --body: var(--dark-body);
+    --faint: var(--dark-faint);
+    --rule: var(--dark-rule);
+    --wash: var(--dark-wash);
+    color-scheme: dark;
+  }
+
+  /*
+   * ⛔ El PDF se imprime siempre en claro, haya elegido lo que haya elegido quien mira.
+   * Un CV impreso en oscuro gasta tinta y se lee peor.
+   */
+  @media print {
+    :root,
+    :root[data-theme="dark"] {
+      --bg: var(--light-bg);
+      --ink: var(--light-ink);
+      --body: var(--light-body);
+      --faint: var(--light-faint);
+      --rule: var(--light-rule);
+      --wash: var(--light-wash);
+      color-scheme: light;
     }
   }
 }

@@ -7,6 +7,7 @@ import "./globals.css";
 import type React from "react";
 import { RESUME_DATA } from "@/data/resume-data";
 import { getPageTitle } from "@/lib/resume";
+import { THEME_INIT_SCRIPT } from "@/lib/theme";
 
 // geist/font/pixel declares all five Pixel variants, and Next preloads every
 // font a module declares, so only the Square variant is declared here.
@@ -55,6 +56,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
     types: { "text/markdown": "/index.md" },
+    languages: { en: "/", es: "/es" },
   },
 };
 
@@ -78,6 +80,16 @@ export default function RootLayout({
       lang="en"
       className={`${GeistMono.variable} ${geistPixelSquare.variable}`}
     >
+      <head>
+        {/*
+          Corre ANTES del primer paint: si no, la pagina aparece en claro y SALTA a oscuro.
+          Un <script src> llegaria tarde, por eso va inline.
+        */}
+        <script
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: evita el parpadeo de tema
+          dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }}
+        />
+      </head>
       <body>
         {children}
         <Analytics />
