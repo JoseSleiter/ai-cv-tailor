@@ -41,6 +41,16 @@ export const HUMAN_ONLY_PLACEHOLDERS = [
 ] as const;
 
 /**
+ * ⚙ Marcadores DERIVADOS: no los escribe la IA ni la persona, salen del dato.
+ *
+ *   {{focus}} — `ROLE_FOCUS[locale][focus].pitch`, el foco que la oferta pide
+ *               (backend / fullstack / frontend). Deterministico a proposito: es
+ *               la frase que posiciona la candidatura y no se deja al azar de un
+ *               modelo.
+ */
+export const DERIVED_PLACEHOLDERS = ["{{focus}}"] as const;
+
+/**
  * Marcadores que SI redacta la IA:
  *   {{company}} {{role}} {{greeting}}
  *   {{hook}} — una o dos frases que conectan la experiencia propia con lo que pide
@@ -55,7 +65,7 @@ export const EMAIL_TEMPLATES: Record<
       subject: "Senior Software Engineer — Jose Sleiter Rios ({{role}})",
       body: `{{greeting}}
 
-I'm reaching out to express my interest in the {{role}} opening at {{company}}, and to share my professional profile as a Senior Software Engineer with a strong backend focus.
+I'm reaching out to express my interest in the {{role}} opening at {{company}}, and to share my professional profile as {{focus}}.
 
 My name is Jose Sleiter. I am a Computer Engineering graduate from Universidad Católica Andrés Bello with 8+ years of professional experience building and scaling production systems remotely for companies across Mexico, Chile, Colombia, Spain, the United Kingdom and the United States.
 
@@ -99,7 +109,7 @@ Computer Engineer`,
       subject: "Senior Software Engineer — Jose Sleiter Rios ({{role}})",
       body: `{{greeting}}
 
-Les escribo para expresar mi interés en la vacante de {{role}} en {{company}} y compartir mi perfil profesional como Ingeniero de Software Senior con foco en backend.
+Les escribo para expresar mi interés en la vacante de {{role}} en {{company}} y compartir mi perfil profesional como {{focus}}.
 
 Mi nombre es Jose Sleiter. Soy Ingeniero en Informática egresado de la Universidad Católica Andrés Bello, con más de 8 años de experiencia construyendo y escalando sistemas en producción de forma remota para empresas de México, Chile, Colombia, España, Reino Unido y Estados Unidos.
 

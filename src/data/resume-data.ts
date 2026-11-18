@@ -2,6 +2,12 @@ import type { Locale, LocaleLabels, ResumeData } from "@/lib/types";
 import avatar from "./avatar.jpg";
 import { RESUME_EN } from "./resume-data.en";
 import { RESUME_ES } from "./resume-data.es";
+import {
+  DEFAULT_FOCUS,
+  orderSkillsFor,
+  ROLE_FOCUS,
+  type RoleFocus,
+} from "./role-focus";
 
 /**
  * El CV esta escrito a mano en DOS idiomas.
@@ -70,3 +76,24 @@ export const RESUME_DATA: ResumeData = resumeFor(DEFAULT_LOCALE);
  * directamente. La Fase 1 del plan hace que el idioma viaje por parametro y esto se va.
  */
 export const SECTION_TITLES = LABELS[DEFAULT_LOCALE].sections;
+
+/**
+ * El CV visto desde el FOCO que pide la vacante.
+ *
+ * ⛔ No fabrica nada: cambia el rotulo, el parrafo de perfil y el ORDEN de las
+ * competencias. Las empresas, fechas, titulos y tecnologias son las mismas, asi
+ * que `assertNoFabrication` lo ve como un subconjunto valido del original.
+ */
+export const resumeWithFocus = (
+  locale: Locale,
+  focus: RoleFocus = DEFAULT_FOCUS
+): ResumeData => {
+  const base = resumeFor(locale);
+  const profile = ROLE_FOCUS[locale][focus];
+  return {
+    ...base,
+    about: `${profile.headline} · ${base.about.split(" · ").at(-1)}`,
+    summary: profile.summary,
+    skills: orderSkillsFor(base.skills, profile),
+  };
+};

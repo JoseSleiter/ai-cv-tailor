@@ -99,6 +99,45 @@ detectado de la oferta y **se elige la versión**, no se traduce.
 automática de un CV se nota. Lo único que la IA hace en el idioma elegido es **reordenar y
 reescribir sobre esa redacción**.
 
+### 5.0-bis ⭐ El rótulo es NEUTRAL y el FOCO se elige por vacante
+
+El título público es **Senior Software Engineer**, sin inclinación a backend ni a frontend, y
+con **8+ años** — el número demostrable: la experiencia arranca en mayo de 2018.
+
+⇒ El eje que decide una candidatura no es la seniority, es el **foco**, y son tres búsquedas
+distintas que un CV sólo puede encabezar de una a la vez:
+
+| Foco | Mercado | Qué encabeza |
+|---|---|---|
+| `backend` | menos competencia, sueldos más altos, menos vacantes | multi-tenant, Saga, RabbitMQ, K8s, el -81% de latencia |
+| `fullstack` | el **default** | lo que los últimos cuatro años fueron de verdad |
+| `frontend` | muchas más vacantes, mucha más competencia | SSR/SSG/ISR, estado a escala, testing, Web Vitals |
+
+`src/data/role-focus.ts` lo tiene en datos: por idioma y por foco, un `headline`, un `summary`,
+un `pitch` para el correo y un `skillOrder`.
+
+⛔ **Y no fabrica nada**: el foco cambia el rótulo, el párrafo de perfil y el **orden** de las
+competencias. Empresas, fechas, títulos y tecnologías son los mismos, así que
+`assertNoFabrication` lo ve como un subconjunto válido del original. `skillOrder` sólo
+**reordena** — una competencia que el foco no nombra queda después, nunca fuera.
+
+⚠ Dos guardas que no son adorno:
+
+- `orderSkillsFor` no puede **agregar** una competencia, por construcción.
+- una guarda evaluada **al construir** revienta si un `skillOrder` nombra algo que el CV de ese
+  idioma no declara. Sin ella, renombrar una competencia deja el orden a medias en silencio: la
+  pantalla sigue renderizando y el foco deja de ordenar lo que decía ordenar.
+
+Y el `fullstack.summary` **no se copia**: es `RESUME_EN.summary` / `RESUME_ES.summary`. Una
+copia del baseline es una copia que deriva.
+
+El correo sigue el mismo eje: `{{focus}}` es un marcador **DERIVADO** (`DERIVED_PLACEHOLDERS`),
+ni humano ni de la IA. Son tres categorías, no dos:
+
+    {{company}} {{role}} {{greeting}} {{hook}}        la IA
+    {{salaryExpectation}} {{availability}}            la PERSONA, nunca la IA
+    {{focus}}                                          el DATO
+
 ### 5.1 Lo heredado — `ResumeData` (`src/lib/types.ts`)
 
 `name`, `location`, `about`, `summary`, `avatar`, `siteUrl`, `contact{email,tel,social[]}`,

@@ -6,7 +6,7 @@ export const RESUME_EN: ResumeContent = {
   location: "Bucaramanga, Colombia (GMT-5)",
   locationLink: "https://www.google.com/maps/place/Bucaramanga",
   about:
-    "Senior Software Engineer · Distributed systems, cloud & full-stack · Open to new opportunities",
+    "Senior Software Engineer · 8+ years · Backend, full-stack & cloud · Open to new opportunities",
   summary:
     "Senior Software Engineer with 8+ years of experience designing, scaling, and maintaining production-grade web applications and distributed cloud systems for companies across the US, LATAM, and Europe. Deep expertise in TypeScript, Python, React/Next.js, Node.js/NestJS, AWS/Azure, and event-driven architectures. Proven track record executing system migrations, reducing latency by 81%, designing multi-tenant schema-isolated databases, and enforcing robust CI/CD testing pipelines. Fluent in English (B2+ Professional Proficiency).",
   siteUrl: SITE_URL,
