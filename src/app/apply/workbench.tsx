@@ -156,6 +156,29 @@ export function Workbench({ applications, voiceSampleCount }: WorkbenchProps) {
       if (sampleRef.current) sampleRef.current.value = "";
     });
 
+  /**
+   * ⛔ Retomar una postulacion guardada.
+   *
+   * El workbench tenia su estado SOLO en memoria: al recargar la pagina, la
+   * postulacion quedaba en el historial y no habia forma de volver a ella —ni
+   * carta, ni PDF, ni changelog—. Un trabajo guardado que no se puede abrir es
+   * un trabajo perdido con apariencia de guardado.
+   */
+  const resume = (slug: string) =>
+    run("Abriendo la postulacion…", async () => {
+      const response = await fetch(`/api/apply/${slug}`);
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload.error ?? "No se pudo abrir.");
+      setAnalysis({
+        slug: payload.slug,
+        spec: payload.spec,
+        tailored: payload.tailored,
+      });
+      setEmail(payload.email);
+      setPreviewKey((key) => key + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
   const dropChange = (field: string) => {
     if (!analysis) return;
     const tailored = { ...analysis.tailored };
@@ -395,13 +418,34 @@ export function Workbench({ applications, voiceSampleCount }: WorkbenchProps) {
       {applications.length > 0 && (
         <section className="space-y-1">
           <h2 className="font-semibold text-sm">Postulaciones anteriores</h2>
+          <p className="text-xs text-muted-foreground">
+            «Retomar» la vuelve a abrir arriba, con su changelog, su carta si ya
+            la tiene, y los botones de PDF y correo.
+          </p>
           <ul className="space-y-0.5 text-sm text-muted-foreground">
             {applications.map((item) => (
-              <li key={item.slug}>
-                {item.createdAt.slice(0, 10)} · {item.company} · {item.role} ·{" "}
-                {item.matchScore}/100 ·{" "}
-                <a className="underline" href={`/preview/${item.slug}`}>
-                  ver
+              <li
+                key={item.slug}
+                className="flex flex-wrap items-baseline gap-x-2"
+              >
+                <span className="text-body">
+                  {item.createdAt.slice(0, 10)} · {item.company} · {item.role} ·{" "}
+                  {item.matchScore}/100
+                </span>
+                <button
+                  type="button"
+                  className="underline"
+                  onClick={() => resume(item.slug)}
+                >
+                  retomar
+                </button>
+                <a
+                  className="underline"
+                  href={`/preview/${item.slug}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  ver el CV
                 </a>
               </li>
             ))}

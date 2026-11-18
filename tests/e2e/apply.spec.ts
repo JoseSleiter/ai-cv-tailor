@@ -48,3 +48,34 @@ test("una oferta vacia no llega al modelo: lo dice y no inventa", async ({ page 
   await page.getByRole("button", { name: "Analizar y adaptar" }).click();
   await expect(page.getByText(/no hay nada que leer/i)).toBeVisible({ timeout: 20_000 });
 });
+
+/**
+ * ⛔ La regresion que motivo el arreglo: el estado del workbench vivia solo en
+ * memoria, asi que una recarga dejaba la postulacion en el historial sin forma
+ * de volver a ella —ni carta, ni PDF, ni changelog—. Guardado y no abrible es
+ * perdido con apariencia de guardado.
+ */
+test("una postulacion se retoma despues de recargar", async ({ page }) => {
+  await page.goto("/apply");
+  await page.getByPlaceholder("Pegá acá la oferta completa.").fill(OFERTA);
+  await page.getByRole("button", { name: "Analizar y adaptar" }).click();
+  await expect(page.getByText(/coincidencia \d+\/100/)).toBeVisible({
+    timeout: 30_000,
+  });
+
+  await page.reload();
+  await expect(page.getByText(/coincidencia \d+\/100/)).toBeHidden();
+
+  await page.getByRole("button", { name: "retomar" }).first().click();
+  await expect(page.getByText(/coincidencia \d+\/100/)).toBeVisible({
+    timeout: 20_000,
+  });
+  await expect(
+    page.getByRole("button", { name: "Descargar el PDF" })
+  ).toBeVisible();
+  await expect(
+    page
+      .frameLocator('iframe[title="CV adaptado"]')
+      .getByRole("heading", { name: "Jose Sleiter Rios" })
+  ).toBeVisible({ timeout: 20_000 });
+});
