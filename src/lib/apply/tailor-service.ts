@@ -8,6 +8,7 @@ import { resumeWithFocus } from "@/data/resume-data";
 import { ROLE_FOCUS } from "@/data/role-focus";
 import { SKILLS_MASTER } from "@/data/skills-master";
 import { ClaudeAgentProvider } from "@/lib/ai/claude-agent";
+import { GeminiProvider } from "@/lib/ai/gemini";
 import { MockAiProvider } from "@/lib/ai/mock";
 import { buildEmailPrompt, EMAIL_SYSTEM } from "@/lib/ai/prompts/email";
 import { buildJobSpecPrompt, JOB_SPEC_SYSTEM } from "@/lib/ai/prompts/job-spec";
@@ -25,10 +26,20 @@ import {
 } from "./schemas";
 import { loadVoiceSamples } from "./voice-store";
 
-export const providerFor = (): AiProvider =>
-  process.env.CV_AI_PROVIDER === "mock"
-    ? new MockAiProvider()
-    : new ClaudeAgentProvider();
+/**
+ * Un solo lugar elige el motor, y los tres son intercambiables de verdad: la
+ * guarda, el contrato zod, los prompts y el PDF no saben cual corrio.
+ */
+export const providerFor = (): AiProvider => {
+  switch (process.env.CV_AI_PROVIDER) {
+    case "mock":
+      return new MockAiProvider();
+    case "gemini":
+      return new GeminiProvider();
+    default:
+      return new ClaudeAgentProvider();
+  }
+};
 
 /** El CV del que se parte, ya visto desde el foco que la oferta pide. */
 export const baseResumeFor = (spec: JobSpec) => {
