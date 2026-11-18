@@ -201,6 +201,21 @@ export const RESUME_ES: ResumeContent = {
         "Herramienta local que adapta este mismo CV a una vacante concreta y redacta el correo de postulación. La IA nunca escribe markup: emite un objeto tipado validado, con una guarda que rechaza empresas, fechas o skills inventadas.",
     },
     {
+      title: "Pool Pass",
+      link: "https://github.com/JoseSleiter/pool-pass",
+      techStack: [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Supabase",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Playwright",
+      ],
+      description:
+        "PWA de reservas para un balneario en Venezuela: se reserva el pase del día, se paga con Pago Móvil C2P en bolívares al cambio oficial del BCV, llega un voucher con QR por correo y se escanea en la entrada. El cupo diario se bloquea dentro de una función de Postgres, así que dos personas no pueden llevarse el último lugar.",
+    },
+    {
       title: "API de OCR de facturas",
       link: "https://github.com/JoseSleiter/02-api-ocr",
       techStack: [
@@ -213,6 +228,13 @@ export const RESUME_ES: ResumeContent = {
       ],
       description:
         "Servicio en NestJS que recibe la foto de una factura y devuelve datos estructurados —fecha e importe total— interpretando el formato numérico según la región. Dos motores de OCR intercambiables detrás de una misma interfaz, AWS Textract y Tesseract local, para que el endpoint corra con o sin credenciales de nube.",
+    },
+    {
+      title: "Flujo de pedidos idempotente",
+      link: "https://github.com/JoseSleiter/pedidos",
+      techStack: ["TypeScript", "NestJS", "Prisma", "PostgreSQL", "Docker"],
+      description:
+        "Un flujo de pedidos construido alrededor de las tres cosas que se rompen con los reintentos: idempotencia, máquinas de estado y transiciones con compare-and-set. La misma Idempotency-Key devuelve el mismo pedido en vez de crear un segundo, y el stock se reserva con un UPDATE condicional, así que la carrera por la última unidad termina en un 201 y un 409.",
     },
     {
       title: "Encadenado de Lambdas con SNS",
@@ -232,6 +254,13 @@ export const RESUME_ES: ResumeContent = {
       techStack: ["Node.js", "Express", "RabbitMQ", "MongoDB", "Docker"],
       description:
         "Los dos lados —productor y consumidor— de un microservicio de carrito dockerizado que se comunica por RabbitMQ (amqplib). Junto con rabit-receive es la versión más chica y ejecutable de la arquitectura orientada a eventos que llevé a producción en Plan Salud C.A.",
+    },
+    {
+      title: "Road Crossing (ensamblador MIPS)",
+      link: "https://github.com/JoseSleiter/Road-Crossing-in-assember",
+      techStack: ["MIPS Assembly", "MARS"],
+      description:
+        "Juego tipo Frogger escrito en ensamblador MIPS para el simulador MARS, dibujando sobre un bitmap mapeado en memoria y leyendo un teclado mapeado en memoria. Proyecto de la universidad, y el único código de esta lista que no tiene un framework debajo.",
     },
   ],
 };

@@ -201,6 +201,21 @@ export const RESUME_EN: ResumeContent = {
         "Local-first tool that tailors this CV to a specific job posting and drafts the application email. The AI never writes markup: it emits a validated typed object, checked by a guard that rejects invented companies, dates or skills.",
     },
     {
+      title: "Pool Pass",
+      link: "https://github.com/JoseSleiter/pool-pass",
+      techStack: [
+        "TypeScript",
+        "Next.js",
+        "React",
+        "Supabase",
+        "PostgreSQL",
+        "Tailwind CSS",
+        "Playwright",
+      ],
+      description:
+        "Booking PWA for a pool club in Venezuela: reserve a day pass, pay by Pago Móvil C2P in bolívars at the official BCV rate, get a QR voucher by email and have it scanned at the gate. Daily capacity is locked inside a Postgres function, so two people cannot take the last slot.",
+    },
+    {
       title: "Invoice OCR API",
       link: "https://github.com/JoseSleiter/02-api-ocr",
       techStack: [
@@ -213,6 +228,13 @@ export const RESUME_EN: ResumeContent = {
       ],
       description:
         "NestJS service that takes a photo of a receipt and returns structured fields — date and total amount — parsed with locale-aware number handling. Two interchangeable OCR engines behind one interface: AWS Textract and local Tesseract, so the same endpoint runs with or without cloud credentials.",
+    },
+    {
+      title: "Idempotent order flow",
+      link: "https://github.com/JoseSleiter/pedidos",
+      techStack: ["TypeScript", "NestJS", "Prisma", "PostgreSQL", "Docker"],
+      description:
+        "An order flow built around the three things that break under retries: idempotency, state machines and compare-and-set transitions. The same Idempotency-Key replays the same order instead of creating a second one, and stock is reserved with a conditional UPDATE, so the race for the last unit ends in one 201 and one 409.",
     },
     {
       title: "Lambda chaining over SNS",
@@ -232,6 +254,13 @@ export const RESUME_EN: ResumeContent = {
       techStack: ["Node.js", "Express", "RabbitMQ", "MongoDB", "Docker"],
       description:
         "Producer and consumer sides of a dockerized cart microservice talking over RabbitMQ (amqplib). The pair with rabit-receive is the smallest runnable version of the event-driven architecture used in production at Plan Salud C.A.",
+    },
+    {
+      title: "Road Crossing (MIPS assembly)",
+      link: "https://github.com/JoseSleiter/Road-Crossing-in-assember",
+      techStack: ["MIPS Assembly", "MARS"],
+      description:
+        "Frogger-style game written in MIPS assembly for the MARS simulator, drawing to a memory-mapped bitmap display and reading a memory-mapped keyboard. A university project, kept because it is the only code here with no framework underneath it.",
     },
   ],
 };
