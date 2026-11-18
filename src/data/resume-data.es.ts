@@ -14,8 +14,7 @@ export const RESUME_ES: ResumeContent = {
 
   work: [
     {
-      company: "Ozmoit",
-      // TODO(sleiter): URL de la empresa
+      company: "Ozmo Global Services",
       title: "Ingeniero Full-Stack Senior",
       start: "Ene 2023",
       end: null,
@@ -33,17 +32,17 @@ export const RESUME_ES: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Ingeniero principal en la reescritura de una plataforma universitaria multi-institución para +50k usuarios activos.",
+        "Ingeniero principal en la reescritura de la plataforma universitaria que sostiene a +50k alumnos activos, reemplazando una API en NestJS y su back-office en React por un único sistema multi-institución en Ruby on Rails 8.",
       highlights: [
-        "Arquitectura y migración: llevé las APIs legacy a una arquitectura modular en Ruby on Rails 8 y microservicios en Python con PostgreSQL y Redis.",
-        "Aislamiento de datos: diseñé el esquema de aislamiento multi-tenant en PostgreSQL resuelto por subdominio, garantizando privacidad total y eliminando fugas de datos entre instituciones.",
-        "Automatización en Python: creé microservicios y herramientas CLI para procesamiento masivo de datos académicos, validación y generación automatizada de documentos en PDF.",
-        "Calidad y CI/CD: construí una suite E2E con ~400 flujos en Playwright integrados en GitLab CI / GitHub Actions como compuertas obligatorias de merge, manteniendo 99.8% de estabilidad en despliegues.",
+        "Arquitectura y migración: llevé las APIs legacy a una arquitectura modular en Rails 8 y microservicios en Python sobre PostgreSQL y Redis, preservando el comportamiento y midiéndolo contra una suite golden master de punta a punta, en vez de afirmarlo.",
+        "Aislamiento por institución: diseñé la separación schema-per-tenant en PostgreSQL resuelta por subdominio y jamás por input del usuario, de modo que ninguna petición pueda alcanzar los datos de otra institución.",
+        "Automatización en Python: microservicios internos y herramientas CLI para procesamiento masivo de datos académicos, validación y generación automatizada de PDF y documentos.",
+        "Compuerta de calidad: ~400 flujos en Playwright integrados en GitLab CI / GitHub Actions como gate obligatorio de merge, manteniendo 99.8% de estabilidad en despliegues. Todo cambio pasa por revisión de pares.",
+        "Entrega en paralelo: el trabajo se reparte en líneas aisladas —worktrees, bases de datos y puertos propios— para que varios ingenieros corran la suite completa a la vez sin pisarse.",
       ],
     },
     {
       company: "Moonshot Partners",
-      // TODO(sleiter): URL de la empresa
       title: "Ingeniero Full-Stack Senior",
       start: "Sep 2021",
       end: "Ene 2023",
@@ -59,15 +58,14 @@ export const RESUME_ES: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Rendimiento y serverless sobre la plataforma de e-learning corporativo de Go1.",
+        "Ingeniería de rendimiento y serverless sobre la plataforma de socios de Go1, un marketplace de e-learning corporativo usado por equipos de formación de empresas.",
       highlights: [
-        "Ingeniería de rendimiento: reconstruí el portal de socios de Go1 en Next.js con generación estática (SSG), reduciendo el tiempo de carga de 8 s a 1.5 s (81% más rápido) y subiendo el puntaje SEO de 85 a 91.",
-        "Serverless y nube: diseñé microservicios serverless en Azure Functions y AWS S3 con Python y Node.js para sincronización automatizada de catálogos e-learning.",
+        "Reconstruí el portal de socios de Go1 en Next.js con generación estática: el tiempo de carga bajó de 8 s a 1.5 s, un 81% más rápido, y el puntaje SEO subió de 85 a 91.",
+        "Diseñé microservicios serverless en Azure Functions y AWS S3 con Python y Node.js para la sincronización automatizada del catálogo de cursos.",
       ],
     },
     {
       company: "TCIT Cloud Solutions",
-      // TODO(sleiter): URL de la empresa
       title: "Ingeniero Full-Stack",
       start: "Mar 2021",
       end: "Ago 2021",
@@ -82,15 +80,14 @@ export const RESUME_ES: ResumeContent = {
         "GitLab CD",
       ],
       description:
-        "Software crítico de gestión de flota para Carabineros de Chile.",
+        "Software crítico de gestión de flota para Carabineros de Chile, la policía nacional del país.",
       highlights: [
-        "Desarrollé una plataforma de alta concurrencia para la gestión de flota, optimizando la programación de mantenimientos y el seguimiento de incidencias en tiempo real.",
-        "Implementé capas de caché en Redis y optimización de consultas en MySQL, reduciendo la latencia de respuesta de las APIs en un 35%.",
+        "Construí una plataforma de alta concurrencia para programar mantenimientos, seguir la telemetría de los vehículos y atender reportes de incidencias en tiempo real.",
+        "Reduje la latencia de respuesta de las APIs en un 35% con capas de caché en Redis y optimización de consultas en MySQL.",
       ],
     },
     {
       company: "Grupo Hostienda S.L.",
-      // TODO(sleiter): URL de la empresa
       title: "Ingeniero de Software",
       start: "May 2018",
       end: "Feb 2021",
@@ -103,34 +100,42 @@ export const RESUME_ES: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Plataformas a medida de gestión de inventario y pedidos multi-sucursal.",
+        "Casi tres años como ingeniero remoto de un grupo de retail multi-sucursal español, a cargo de punta a punta de sus sistemas de pedidos e inventario a medida.",
       highlights: [
-        "Desarrollé software a medida de gestión de inventario y pedidos multi-sucursal en React y Node.js.",
-        "Creé scripts de automatización y herramientas internas en Python (Flask) para procesamiento de datos, lectura de archivos y conciliación de stock entre tiendas.",
+        "Desarrollé plataformas a medida de gestión de pedidos e inventario multi-sucursal en React y Node.js.",
+        "Creé procesos en Python (Flask) y herramientas de procesamiento de datos que conciliaban el stock automáticamente entre tiendas remotas.",
       ],
     },
     {
-      company: "Plan Salud C.A. y proyectos destacados",
-      // TODO(sleiter): URL (o quitar el enlace)
-      title: "Ingeniero de Sistemas Distribuidos",
+      company: "Freelance · proyectos de clientes",
+      title: "Ingeniero de Sistemas Distribuidos y Full-Stack",
       start: "Nov 2018",
-      end: "Abr 2020",
+      end: "May 2020",
       badges: [
         "Remoto",
         "Python (Flask)",
         "Node.js",
+        "Laravel",
+        "React",
+        "Vue.js",
+        "Angular",
+        "Laravel",
+        "Angular",
+        "React Native",
         "Docker",
         "Kubernetes",
         "Kong Gateway",
         "RabbitMQ",
-        "React",
         "Stripe",
+        "AWS",
       ],
       description:
-        "Plataformas de microservicios orientadas a eventos y sistemas de reserva de alta concurrencia.",
+        "Cinco productos para cuatro clientes en Venezuela, México y Chile —desde una plataforma backend orientada a eventos hasta una app móvil—, cada uno entregado en solitario y en remoto.",
       highlights: [
-        "Plan Salud C.A.: diseñé la arquitectura de microservicios para control de stock farmacéutico con Python (Flask), Node.js, Docker, Kubernetes, Kong API Gateway, RabbitMQ y patrón Saga para consistencia transaccional.",
-        "789.mx: construí el motor de reservas con pagos en Stripe y mapa interactivo de asientos en React y Node.js/Python, generando un aumento del 80% en ventas para el cliente.",
+        "Plan Salud C.A. — plataforma de inventario farmacéutico orientada a eventos: servicios en Python (Flask) y Node.js detrás de un gateway Kong, contenerizados con Docker y orquestados en Kubernetes, mensajería sobre RabbitMQ y patrón Saga para la consistencia transaccional entre servicios.",
+        "789.mx (México) — motor de reservas de sesiones de spinning con pagos Stripe y mapa interactivo de asientos; backend en Laravel y Node.js, frontend en React y Vue.js. Generó un aumento del 80% en las ventas del cliente.",
+        "Foodsys.io (Chile) — aplicación web en Angular v7 que conectaba empresas con su proveedor más cercano para un producto dado, sobre backend Node.js y AWS S3.",
+        "Brocsoft — app en React Native para la gestión de turnos y descansos de repartidores, con backend Node.js/Express sobre AWS.",
       ],
     },
   ],
@@ -159,6 +164,8 @@ export const RESUME_ES: ResumeContent = {
     "Redux",
     "React Native",
     "Vue.js",
+    "Angular",
+    "Laravel",
     "Tailwind CSS",
     "Hotwire (Turbo/Stimulus)",
     "Ruby on Rails",

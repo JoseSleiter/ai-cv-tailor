@@ -13,8 +13,7 @@ export const RESUME_EN: ResumeContent = {
 
   work: [
     {
-      company: "Ozmoit",
-      // TODO(sleiter): URL de la empresa
+      company: "Ozmo Global Services",
       title: "Senior Full-Stack Engineer",
       start: "Jan 2023",
       end: null,
@@ -32,17 +31,17 @@ export const RESUME_EN: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Core engineer on the rewrite of a multi-tenant university management platform serving 50k+ active users.",
+        "Core engineer on the rewrite of the university management platform behind 50k+ active students, replacing a NestJS API and its React back-office with a single multi-tenant Ruby on Rails 8 system.",
       highlights: [
-        "System architecture & migration: moved legacy APIs to a modular Ruby on Rails 8 and Python microservices architecture with PostgreSQL and Redis.",
-        "Database isolation: designed schema-per-tenant isolation in PostgreSQL driven by dynamic subdomain resolution, guaranteeing strict data privacy and zero cross-tenant leakage.",
-        "Python automation: built internal Python microservices and CLI tools for high-volume student record processing, validation, and automated PDF document generation.",
-        "Quality & CI/CD: engineered an E2E regression suite with ~400 Playwright flows integrated into GitLab CI / GitHub Actions as mandatory PR merge gates, sustaining 99.8% deployment reliability.",
+        "Architecture & migration: moved legacy APIs onto a modular Rails 8 and Python microservices architecture on PostgreSQL and Redis — preserving behaviour, measured against a golden-master end-to-end suite rather than asserted.",
+        "Tenant isolation: designed schema-per-tenant separation in PostgreSQL resolved from the subdomain and never from user input, so no request can reach another institution's data.",
+        "Python automation: internal microservices and CLI tools for high-volume student record processing, validation, and automated PDF and document generation.",
+        "Quality gate: ~400 Playwright flows wired into GitLab CI / GitHub Actions as a mandatory merge gate, sustaining 99.8% deployment reliability. Every change ships through peer review.",
+        "Parallel delivery: work is split across isolated workstreams — separate git worktrees, databases and ports — so several engineers can run the full regression suite at once without colliding.",
       ],
     },
     {
       company: "Moonshot Partners",
-      // TODO(sleiter): URL de la empresa
       title: "Senior Full-Stack Engineer",
       start: "Sep 2021",
       end: "Jan 2023",
@@ -58,15 +57,14 @@ export const RESUME_EN: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Performance and serverless work on Go1's corporate e-learning partner platform.",
+        "Performance and serverless engineering on the partner platform of Go1, a corporate e-learning marketplace used by enterprise training teams.",
       highlights: [
-        "Performance engineering: rebuilt the Go1 corporate e-learning partner portal in Next.js with Static Site Generation, cutting page load time from 8s to 1.5s (81% faster) and lifting the SEO score from 85 to 91.",
-        "Serverless & cloud: architected serverless backend microservices on Azure Functions and AWS S3 using Python and Node.js for automated course content synchronization.",
+        "Rebuilt the Go1 partner portal in Next.js with static site generation: page load time 8s to 1.5s, an 81% improvement, and SEO score from 85 to 91.",
+        "Architected serverless backend microservices on Azure Functions and AWS S3 in Python and Node.js for automated course-catalogue synchronisation.",
       ],
     },
     {
       company: "TCIT Cloud Solutions",
-      // TODO(sleiter): URL de la empresa
       title: "Full-Stack Engineer",
       start: "Mar 2021",
       end: "Aug 2021",
@@ -81,15 +79,14 @@ export const RESUME_EN: ResumeContent = {
         "GitLab CD",
       ],
       description:
-        "Mission-critical fleet management software for Carabineros de Chile.",
+        "Mission-critical fleet management software for Carabineros de Chile, the country's national police force.",
       highlights: [
-        "Built a high-concurrency fleet management system to schedule repairs, track vehicle telemetry, and handle real-time incident reports.",
-        "Implemented Redis caching layers and optimized MySQL queries, reducing API response latency by 35%.",
+        "Built a high-concurrency system to schedule vehicle repairs, track telemetry, and handle real-time incident reports across the fleet.",
+        "Cut API response latency by 35% with Redis caching layers and MySQL query optimisation.",
       ],
     },
     {
       company: "Grupo Hostienda S.L.",
-      // TODO(sleiter): URL de la empresa
       title: "Software Engineer",
       start: "May 2018",
       end: "Feb 2021",
@@ -102,34 +99,42 @@ export const RESUME_EN: ResumeContent = {
         "GitLab CI/CD",
       ],
       description:
-        "Custom order and inventory control platforms for multi-branch retail systems.",
+        "Nearly three years as the remote engineer for a Spanish multi-branch retail group, owning its custom order and inventory systems end to end.",
       highlights: [
-        "Designed order and inventory platforms for multi-branch retail in React and Node.js.",
-        "Developed Python (Flask) background scripts and data processing tools for automated stock reconciliation across remote store locations.",
+        "Designed custom order and inventory-control platforms for multi-branch retail in React and Node.js.",
+        "Built Python (Flask) background jobs and data-processing tools that reconciled stock automatically across remote store locations.",
       ],
     },
     {
-      company: "Plan Salud C.A. & client projects",
-      // TODO(sleiter): URL (o quitar el enlace)
-      title: "Distributed Systems Engineer",
+      company: "Freelance · client projects",
+      title: "Distributed Systems & Full-Stack Engineer",
       start: "Nov 2018",
-      end: "Apr 2020",
+      end: "May 2020",
       badges: [
         "Remote",
         "Python (Flask)",
         "Node.js",
+        "Laravel",
+        "React",
+        "Vue.js",
+        "Angular",
+        "Laravel",
+        "Angular",
+        "React Native",
         "Docker",
         "Kubernetes",
         "Kong Gateway",
         "RabbitMQ",
-        "React",
         "Stripe",
+        "AWS",
       ],
       description:
-        "Event-driven microservice platforms and high-concurrency booking systems.",
+        "Five product builds for four clients across Venezuela, Mexico and Chile — from an event-driven backend platform to a mobile app — each delivered solo and remotely.",
       highlights: [
-        "Plan Salud C.A.: engineered an event-driven pharmaceutical inventory microservice platform using Python (Flask), Node.js, Docker, Kubernetes, Kong API Gateway, RabbitMQ, and the Saga pattern for transaction consistency.",
-        "789.mx: developed a high-concurrency booking platform with Stripe payments and interactive seating maps in React and Node.js/Python, driving an 80% increase in revenue.",
+        "Plan Salud C.A. — event-driven pharmaceutical inventory platform: Python (Flask) and Node.js services behind a Kong API gateway, containerised with Docker and orchestrated on Kubernetes, messaging over RabbitMQ, and the Saga pattern for transaction consistency across services.",
+        "789.mx (Mexico) — booking engine for spinning sessions with Stripe payments and an interactive seat map; backend in Laravel and Node.js, frontend in React and Vue.js. Drove an 80% increase in the client's sales.",
+        "Foodsys.io (Chile) — Angular v7 web app matching companies with their nearest supplier for a given product, on a Node.js backend with AWS S3.",
+        "Brocsoft — React Native app for delivery-courier scheduling and break management, with a Node.js/Express backend on AWS.",
       ],
     },
   ],
@@ -158,6 +163,8 @@ export const RESUME_EN: ResumeContent = {
     "Redux",
     "React Native",
     "Vue.js",
+    "Angular",
+    "Laravel",
     "Tailwind CSS",
     "Hotwire (Turbo/Stimulus)",
     "Ruby on Rails",
