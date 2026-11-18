@@ -301,6 +301,41 @@ aprueba antes de exportar.
 
 ---
 
+## Dos motores, medidos contra el mismo contrato (18-11-2026)
+
+`AiProvider` existia para que el motor fuera intercambiable, y una interfaz con UNA implementacion
+es una afirmacion que nadie puede verificar. Hay una segunda: `GeminiProvider`, ~100 lineas y
+**cero dependencias nuevas** (el SDK de Google arrastra protobufjs y rompe el `pnpm install` del
+build; lo que se necesita es un POST).
+
+La misma oferta, el mismo CV, el mismo contrato zod y la misma guarda:
+
+| | Gemini 3.6 Flash | Claude Opus 5.5 |
+|---|---|---|
+| Tiempo | 43 s | 61 s |
+| `matchScore` | **95**/100 | 66/100 |
+| Competencias que deja | 20 | 29 |
+| **`gaps` encontrados** | **1** | 9 |
+| Entradas de changelog | 3 | 9 |
+
+⭐ **Los dos pasaron la guarda: ninguno invento nada.** La diferencia no esta en la honestidad del
+dato, esta en cuanto le dice al candidato lo que quiere oir. El unico gap de Gemini fue
+*«Terraform (listed in niceToHave, not backed by CV)»*. Claude encontro nueve, checkables uno por
+uno: *«At Ozmo the NestJS API was being replaced, not built»*, *«the most recent production cloud
+is Azure, while the posting asks for AWS»*.
+
+⇒ **Un 95/100 con un solo gap manda a la entrevista desprevenido**, que es el antipatron que este
+proyecto declara evitar. Por eso el default es Claude y el switch existe igual: quien clone el
+repo no tiene por que tener una suscripcion de Claude Code, y sin un segundo proveedor el
+proyecto que se muestra en el CV es una demo que solo corre en una maquina.
+
+⚠ Y la garantia que el switch rompe, dicha una vez mas porque es la que se olvida: con el Agent
+SDK el «solo local» es ESTRUCTURAL —en la nube no existe el binario `claude`—. Una API key viaja
+a cualquier lado. Con `CV_AI_PROVIDER=gemini`, `isLocalMode()` vuelve a ser un `if`, y la key no
+se configura nunca en el despliegue.
+
+---
+
 ## Fase 9 · Tests y calidad
 
 **Entrega**
