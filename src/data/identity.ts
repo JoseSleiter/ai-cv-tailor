@@ -7,7 +7,7 @@ import type { ResumeData, SocialLink } from "@/lib/types";
  */
 
 /**
- * La URL publica real, desplegada el 18-11-2026.
+ * La URL publica real, desplegada el 18-11-2026 (el dominio se renombro el mismo dia).
  *
  * ⚠ No es cosmetica: de aca salen el `sitemap.xml`, la linea `Sitemap:` del
  * robots.txt, los `canonical` y el `image` del JSON-LD. Con el placeholder
@@ -18,7 +18,7 @@ import type { ResumeData, SocialLink } from "@/lib/types";
  *
  * TODO(sleiter): cambiar por el dominio propio si algun dia hay uno.
  */
-export const SITE_URL = "https://ai-cv-tailor-henna.vercel.app";
+export const SITE_URL = "https://ai-cv-sleiter.vercel.app";
 
 export const CONTACT: ResumeData["contact"] = {
   email: "sleiter.js@gmail.com",
