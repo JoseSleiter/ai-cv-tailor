@@ -18,6 +18,13 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+
+      # ⛔ El build va ANTES del tsc, y no es gusto: `next-env.d.ts` —que es
+      # quien declara los modulos de imagen, como `./avatar.jpg`— lo GENERA el
+      # build y esta en .gitignore. Un `tsc --noEmit` en limpio falla con
+      # `Cannot find module './avatar.jpg'`, que no tiene nada que ver con el
+      # codigo. Lo encontro esta misma corrida la primera vez que se lanzo.
+      - run: pnpm build
       - run: pnpm exec tsc --noEmit
       - run: pnpm test
 

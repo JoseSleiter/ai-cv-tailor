@@ -21,7 +21,8 @@ export default defineConfig({
   reporter: process.env.CI ? "list" : "line",
   use: { baseURL: `http://localhost:${PORT}` },
   webServer: {
-    command: "pnpm build && pnpm start",
+    /** En CI el build ya corrio en su propio paso: no se compila dos veces. */
+    command: process.env.CI ? "pnpm start" : "pnpm build && pnpm start",
     port: PORT,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
