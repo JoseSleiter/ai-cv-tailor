@@ -1,7 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { NextResponse } from "next/server";
-import { chromium } from "playwright";
 import { z } from "zod";
 import { applicationPath, readApplication } from "@/lib/apply/store";
 import { isLocalMode, pdfTimeoutMs } from "@/lib/environment";
@@ -37,6 +36,13 @@ export async function POST(request: Request) {
     );
   }
 
+  /**
+   * ⛔ Playwright se importa ACA y no arriba, y no es estilo: un import de
+   * modulo entra al bundle de la funcion aunque la ruta devuelva 404 antes de
+   * usarlo. Son ~100 MB de navegador que el despliegue de nube no necesita,
+   * porque en la nube esta ruta no corre nunca.
+   */
+  const { chromium } = await import("playwright");
   const origin = new URL(request.url).origin;
   const browser = await chromium.launch();
   try {

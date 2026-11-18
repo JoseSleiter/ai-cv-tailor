@@ -7,8 +7,6 @@ import {
 import { resumeWithFocus } from "@/data/resume-data";
 import { ROLE_FOCUS } from "@/data/role-focus";
 import { SKILLS_MASTER } from "@/data/skills-master";
-import { ClaudeAgentProvider } from "@/lib/ai/claude-agent";
-import { GeminiProvider } from "@/lib/ai/gemini";
 import { MockAiProvider } from "@/lib/ai/mock";
 import { buildEmailPrompt, EMAIL_SYSTEM } from "@/lib/ai/prompts/email";
 import { buildJobSpecPrompt, JOB_SPEC_SYSTEM } from "@/lib/ai/prompts/job-spec";
@@ -30,14 +28,18 @@ import { loadVoiceSamples } from "./voice-store";
  * Un solo lugar elige el motor, y los tres son intercambiables de verdad: la
  * guarda, el contrato zod, los prompts y el PDF no saben cual corrio.
  */
-export const providerFor = (): AiProvider => {
+export const providerFor = async (): Promise<AiProvider> => {
   switch (process.env.CV_AI_PROVIDER) {
     case "mock":
       return new MockAiProvider();
-    case "gemini":
+    case "gemini": {
+      const { GeminiProvider } = await import("@/lib/ai/gemini");
       return new GeminiProvider();
-    default:
+    }
+    default: {
+      const { ClaudeAgentProvider } = await import("@/lib/ai/claude-agent");
       return new ClaudeAgentProvider();
+    }
   }
 };
 
@@ -52,9 +54,10 @@ export const baseResumeFor = (spec: JobSpec) => {
 
 export async function readJobOffer(
   offer: JobOffer,
-  provider: AiProvider = providerFor()
+  provider?: AiProvider
 ): Promise<JobSpec> {
-  return provider.complete({
+  const ai = provider ?? (await providerFor());
+  return ai.complete({
     operation: "jobSpec",
     schema: jobSpecSchema,
     system: JOB_SPEC_SYSTEM,
@@ -86,8 +89,9 @@ export async function readJobOffer(
  */
 export async function tailorResume(
   spec: JobSpec,
-  provider: AiProvider = providerFor()
+  provider?: AiProvider
 ): Promise<TailoredResume> {
+  const ai = provider ?? (await providerFor());
   const resume = baseResumeFor(spec);
   const request = {
     operation: "tailor" as const,
@@ -109,11 +113,11 @@ export async function tailorResume(
     }),
   };
 
-  const first = await provider.complete(request);
+  const first = await ai.complete(request);
   const violations = collectViolations(resume, first);
   if (violations.length === 0) return first;
 
-  const second = await provider.complete({
+  const second = await ai.complete({
     ...request,
     feedback: `A post-hoc guard compared your answer with the original CV and refused it:\n- ${violations.join("\n- ")}`,
   });
@@ -140,10 +144,11 @@ export async function draftEmail(
   spec: JobSpec,
   tailored: TailoredResume,
   variant: EmailVariant,
-  provider: AiProvider = providerFor()
+  provider?: AiProvider
 ): Promise<ApplicationEmail> {
+  const ai = provider ?? (await providerFor());
   const template = prepareTemplate(spec, variant);
-  const email = await provider.complete({
+  const email = await ai.complete({
     operation: "email",
     schema: applicationEmailSchema,
     system: EMAIL_SYSTEM,
