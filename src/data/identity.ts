@@ -1,4 +1,4 @@
-import type { ResumeData } from "@/lib/types";
+import type { ResumeData, SocialLink } from "@/lib/types";
 
 /**
  * Lo que NO cambia entre idiomas ni entre postulaciones.
@@ -25,3 +25,21 @@ export const CONTACT: ResumeData["contact"] = {
     },
   ],
 };
+
+/**
+ * Perfiles OPCIONALES: viven en la web y NUNCA en el PDF.
+ *
+ * ⛔ Estan FUERA de `CONTACT.social` a proposito, no con una clase de CSS: todo
+ * lo que entra ahi lo imprime `PrintContact` y lo exporta `getContactLinks`. Un
+ * enlace que solo se mira en pantalla se decide en la ESTRUCTURA del dato, que
+ * es lo unico que no se olvida al tocar una vista.
+ *
+ * ⚠ Y por lo mismo quedan fuera de lo que viaja a la IA: no son parte del CV.
+ */
+export const PROFILE_LINKS: readonly SocialLink[] = [
+  {
+    name: "LeetCode",
+    url: "https://leetcode.com/u/josesleiter/",
+    icon: "leetcode",
+  },
+];

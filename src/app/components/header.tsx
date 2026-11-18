@@ -2,8 +2,10 @@ import { GlobeIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import Image from "next/image";
 import type React from "react";
 import { GitHubIcon } from "@/components/icons/github-icon";
+import { LeetCodeIcon } from "@/components/icons/leetcode-icon";
 import { LinkedInIcon } from "@/components/icons/linkedin-icon";
 import { XIcon } from "@/components/icons/x-icon";
+import { PROFILE_LINKS } from "@/data/identity";
 import {
   type ContactIcon,
   type ContactLink,
@@ -18,6 +20,7 @@ const ICON_MAP: Record<
   github: GitHubIcon,
   linkedin: LinkedInIcon,
   x: XIcon,
+  leetcode: LeetCodeIcon,
   globe: GlobeIcon,
   mail: MailIcon,
   phone: PhoneIcon,
@@ -77,6 +80,11 @@ function ContactButtons({ links }: ContactLinksProps) {
       {links.map(({ href, label, icon }) => (
         <li key={label}>
           <SocialButton href={href} iconType={icon} label={label} />
+        </li>
+      ))}
+      {PROFILE_LINKS.map(({ name, url, icon }) => (
+        <li key={name}>
+          <SocialButton href={url} iconType={icon} label={name} />
         </li>
       ))}
     </ul>

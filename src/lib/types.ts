@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 
 export type Locale = "en" | "es";
 
-export type SocialIcon = "github" | "linkedin" | "x";
+export type SocialIcon = "github" | "linkedin" | "x" | "leetcode";
 
 export interface SocialLink {
   name: string;
