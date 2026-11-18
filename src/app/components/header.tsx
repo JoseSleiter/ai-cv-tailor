@@ -138,16 +138,18 @@ export function Header({ data, controls }: HeaderProps) {
         <PrintContact links={contactLinks} />
       </div>
 
-      <div className="flex shrink-0 flex-col items-end gap-y-2">
+      <div className="flex shrink-0 flex-col items-end gap-y-2 print:hidden">
         {controls}
-        <Image
-          className="size-28 shrink-0 rounded-xl bg-muted object-cover ring-1 ring-muted"
-          src={data.avatar}
-          alt={`${data.name} profile picture`}
-          width={112}
-          height={112}
-          preload={true}
-        />
+        {data.avatar && (
+          <Image
+            className="size-28 shrink-0 rounded-xl bg-muted object-cover ring-1 ring-muted"
+            src={data.avatar}
+            alt={`${data.name} profile picture`}
+            width={112}
+            height={112}
+            preload={true}
+          />
+        )}
       </div>
     </header>
   );

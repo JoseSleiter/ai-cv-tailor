@@ -43,7 +43,18 @@ export interface ResumeData {
   locationLink: string;
   about: string;
   summary: string;
-  avatar: StaticImageData;
+  /**
+   * La foto va en la WEB y NUNCA en el PDF.
+   *
+   * ⛔ Es OPCIONAL a proposito, no un `print:hidden`: el CV que se adapta a una
+   * vacante se construye desde `ResumeContent`, que no tiene este campo, asi que
+   * la ruta del PDF no tiene foto que imprimir ni que olvidarse de esconder. En
+   * la pagina publica, que si la muestra, el elemento ademas es `print:hidden`
+   * para que un `Cmd+P` de el mismo documento que el PDF.
+   *
+   * El motivo es del oficio: el formato estandar de un CV tecnico no lleva foto.
+   */
+  avatar?: StaticImageData;
   siteUrl: string;
   personalWebsiteUrl?: string;
   contact: {
@@ -60,9 +71,9 @@ export interface ResumeData {
 /**
  * Lo que viaja a y desde la IA, y lo que se guarda en `.applications/<slug>/tailored.json`.
  *
- * ⚠ `avatar` queda FUERA a proposito: es un `StaticImageData` que inyecta el bundler, no es
- * serializable a JSON. Se vuelve a enganchar en el render. Pasarlo por alto rompe la
- * serializacion sin un error claro.
+ * ⚠ `avatar` queda FUERA a proposito, por DOS motivos: es un `StaticImageData` que inyecta
+ * el bundler y no es serializable a JSON, y la foto no es parte del CV —el PDF no la lleva—.
+ * Se vuelve a enganchar en el render de la pagina, y solo ahi.
  */
 export type ResumeContent = Omit<ResumeData, "avatar">;
 

@@ -20,13 +20,19 @@ const avatarSignatures = {
 };
 
 async function readAvatar() {
-  const [path] = RESUME_DATA.avatar.src.split("?");
+  if (!RESUME_DATA.avatar) {
+    throw new Error(
+      "The resume has no avatar, so the OG image can't draw it. The photo is optional by design (it never reaches the PDF); if you removed it, remove this image too."
+    );
+  }
+  const { src } = RESUME_DATA.avatar;
+  const [path] = src.split("?");
   const media = path.match(
     /(?<name>[^/]+)\.(?<hash>[^./]+)\.(?<extension>[^./]+)$/
   )?.groups;
   if (!media) {
     throw new Error(
-      `The avatar ${RESUME_DATA.avatar.src} is not imported from an image file directly in src/data, so the OG image can't draw it.`
+      `The avatar ${src} is not imported from an image file directly in src/data, so the OG image can't draw it.`
     );
   }
   const file = `src/data/${media.name}.${media.extension}`;
