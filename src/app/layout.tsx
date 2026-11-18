@@ -23,7 +23,7 @@ const xProfile = RESUME_DATA.contact.social.find(({ icon }) => icon === "x");
 export const metadata: Metadata = {
   metadataBase: new URL(RESUME_DATA.siteUrl),
   title: getPageTitle(RESUME_DATA),
-  description: RESUME_DATA.about,
+  description: RESUME_DATA.summary,
   authors: [{ name: RESUME_DATA.name }],
   creator: RESUME_DATA.name,
   publisher: RESUME_DATA.name,

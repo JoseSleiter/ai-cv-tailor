@@ -1,5 +1,5 @@
 import { RESUME_DATA } from "@/data/resume-data";
-import { getCurrentRole } from "@/lib/resume";
+import { getHeadlineRole } from "@/lib/resume";
 
 export function generateResumeStructuredData() {
   const {
@@ -13,7 +13,7 @@ export function generateResumeStructuredData() {
     education,
     skills,
   } = RESUME_DATA;
-  const currentRole = getCurrentRole(work);
+  const currentRole = getHeadlineRole(work);
 
   return {
     "@context": "https://schema.org",

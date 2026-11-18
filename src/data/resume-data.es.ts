@@ -6,7 +6,7 @@ export const RESUME_ES: ResumeContent = {
   location: "Bucaramanga, Colombia (GMT-5)",
   locationLink: "https://www.google.com/maps/place/Bucaramanga",
   about:
-    "Senior Software Engineer · Sistemas distribuidos, Cloud y Full-Stack.",
+    "Senior Software Engineer · Sistemas distribuidos, cloud y full-stack · Disponible para nuevas oportunidades",
   summary:
     "Ingeniero de Software Senior con más de 8 años de experiencia diseñando, escalando y desplegando plataformas web y sistemas distribuidos en la nube para empresas de EE. UU., LATAM y Europa. Especialista en TypeScript, Python, React/Next.js, Node.js/NestJS, AWS/Azure y arquitecturas orientadas a eventos. Trayectoria demostrable ejecutando reescrituras de sistemas, reduciendo latencias en un 81%, diseñando bases de datos multi-tenant aisladas e integrando pipelines de pruebas automatizadas en CI/CD. Nivel de inglés fluido (B2+ Avanzado).",
   siteUrl: SITE_URL,
@@ -17,7 +17,7 @@ export const RESUME_ES: ResumeContent = {
       company: "Ozmo Global Services",
       title: "Ingeniero Full-Stack Senior",
       start: "Ene 2023",
-      end: null,
+      end: "Nov 2026",
       badges: [
         "Remoto (Chile)",
         "TypeScript",

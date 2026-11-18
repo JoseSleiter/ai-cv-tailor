@@ -23,8 +23,19 @@ export function getCurrentRole(work: WorkEntry[]): WorkEntry | undefined {
   return work.find((job) => job.end === null);
 }
 
+/**
+ * El puesto que define el titulo de la pagina y el JSON-LD.
+ *
+ * ⚠ Cae al mas RECIENTE cuando no hay ninguno en curso. Sin esto, el dia que el ultimo
+ * trabajo deja de ser `end: null` el titulo pasa a "<nombre> - Resume" y el JSON-LD se
+ * queda sin `jobTitle` ni `worksFor`, en silencio y justo cuando mas se busca trabajo.
+ */
+export function getHeadlineRole(work: WorkEntry[]): WorkEntry | undefined {
+  return getCurrentRole(work) ?? work[0];
+}
+
 export function getPageTitle({ name, work }: ResumeContent): string {
-  return `${name} - ${getCurrentRole(work)?.title ?? "Resume"}`;
+  return `${name} - ${getHeadlineRole(work)?.title ?? "Resume"}`;
 }
 
 const decodeNonAsciiEscapes = (text: string) =>
